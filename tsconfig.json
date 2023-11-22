@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    // @typescript-eslint/utils requires  the use of a modern module resolution strategy.
+    // See: https://github.com/typescript-eslint/typescript-eslint/issues/7284
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "outDir": "dist",
+
+    // We emit declarations so that importing projects can use 'node_modules/@figma' as a type root.
+    // If we don't emit types, TypeScript will complain that this directory does not export any types.
+    "declaration": true
+  }
+}
