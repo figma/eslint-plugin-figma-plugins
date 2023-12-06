@@ -11,10 +11,8 @@ export const deprecateSyncMethods = createPluginRule({
   meta: {
     docs: {
       description: 'Deprecated synchronous method',
-      recommended: 'recommended',
     },
     fixable: 'code',
-    hasSuggestions: true,
     messages: {
       useReplacement:
         '{{receiverType}}.{{method}} is deprecated. Please use {{replacement}} instead.',

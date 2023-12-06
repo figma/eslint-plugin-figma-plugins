@@ -11,10 +11,8 @@ export const deprecateSyncPropGetters = createPluginRule({
   meta: {
     docs: {
       description: 'Deprecated synchronous property getter',
-      recommended: 'recommended',
     },
     fixable: 'code',
-    hasSuggestions: true,
     messages: {
       useReplacement:
         '{{receiverType}}.{{property}} is deprecated. Please use {{replacement}} instead.',
