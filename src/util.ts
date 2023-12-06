@@ -69,3 +69,72 @@ export function matchParentTypes<TMessageIds extends string, TOptions extends re
   const match = parentTypes.find((name) => composedOfTypeWithName(type, name))
   return match ? { nodeType: type, matchedParentType: match } : undefined
 }
+
+export enum TraverseTreeResult {
+  Continue,
+  SkipChildren,
+  Done,
+}
+
+/**
+ * Traverse a TSESTree.Node tree in depth-first order. The visitor function can
+ * indicate whether to continue traversing the node's children, skip the node's
+ * children, or stop traversing altogether.
+ */
+export function traverseTree(
+  root: TSESTree.Node,
+  visitor: (node: TSESTree.Node) => TraverseTreeResult,
+): void {
+  traverseTreeRecursive(root, visitor)
+}
+
+export function traverseTreeRecursive(
+  node: unknown,
+  visitor: (node: TSESTree.Node) => TraverseTreeResult,
+): TraverseTreeResult.Done | undefined {
+  // This algorithm is provided by:
+  // github.com/typescript-eslint/typescript-eslint/blob/705370ac0d9c54081657b8855b398e57d6ea4ddb/packages/typescript-estree/src/simple-traverse.ts
+
+  if (!isValidNode(node)) {
+    return
+  }
+
+  const result = visitor(node)
+  if (result === TraverseTreeResult.Done) {
+    return TraverseTreeResult.Done
+  }
+  if (result === TraverseTreeResult.SkipChildren) {
+    return
+  }
+
+  for (const [k, childOrChildren] of Object.entries(node)) {
+    // Avoid cycles. Ideally, we could restrict this to an even narrower set of
+    // keys, but it's a lot of work to inventory all possible keys containing
+    // child nodes, and it wouldn't be future-proof.
+    if (k === 'parent') {
+      continue
+    }
+
+    if (Array.isArray(childOrChildren)) {
+      for (const child of childOrChildren) {
+        if (traverseTreeRecursive(child, visitor) === TraverseTreeResult.Done) {
+          return TraverseTreeResult.Done
+        }
+      }
+      continue
+    }
+
+    if (traverseTreeRecursive(childOrChildren, visitor) === TraverseTreeResult.Done) {
+      return TraverseTreeResult.Done
+    }
+  }
+}
+
+/**
+ * This is a duck-type test to determine whether a value is a TSESTree.Node. It
+ * is not particularly bulletproof, and I'd suggest not using it unless you can
+ * guarantee that the input value is either a node or comes from a node.
+ */
+function isValidNode(x: unknown): x is TSESTree.Node {
+  return typeof x === 'object' && x != null && 'type' in x && typeof x.type === 'string'
+}
