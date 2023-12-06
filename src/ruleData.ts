@@ -15,6 +15,11 @@ export const deprecatedSyncPropGetters: DeprecatedSyncPropGetter[] = [
     replacement: 'getConsumersAsync',
     parentTypes: ['BaseStyle'],
   },
+  {
+    property: 'mainComponent',
+    replacement: 'getMainComponentAsync',
+    parentTypes: ['InstanceNode'],
+  },
 ]
 
 interface DeprecatedSyncPropSetter {
