@@ -59,3 +59,25 @@ module.exports = {
 ```
 
 The rules from this package should now be active any time you run eslint, including via the [eslint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+
+## Restart eslint server
+
+If you've run `npm install` and updated to a newer version of this package, remember to restart your IDE or the IDE's eslint server.
+
+## Autofixing
+
+Some rules provide autofixes. You can run these from the command line:
+
+```
+eslint --fix ./path/to/source
+```
+
+Alternately, you can use your IDE's eslint extension to trigger the fixes on a per-line or whole-file basis.
+
+# Developing
+
+To compile the rules properly, run:
+
+```
+npm run watch
+```
