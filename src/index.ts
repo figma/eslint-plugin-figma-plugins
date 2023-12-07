@@ -2,6 +2,7 @@ import { deprecateSyncPropGetters } from './rules/deprecateSyncPropGetters'
 import { deprecateSyncMethods } from './rules/deprecateSyncMethods'
 import { deprecateSyncPropSetters } from './rules/deprecateSyncPropSetters'
 import { awaitRequiresAsync } from './rules/awaitRequiresAsync'
+import { deprecateDocumentChangeEvent } from './rules/deprecateDocumentChangeEvent'
 
 function ruleset(type: string, rules: Record<string, unknown>): Record<string, string> {
   return Object.keys(rules).reduce((acc, name) => {
@@ -11,7 +12,8 @@ function ruleset(type: string, rules: Record<string, unknown>): Record<string, s
 }
 
 const errorRules: Record<string, unknown> = {
-  'await-requires-async': awaitRequiresAsync, // TODO: move out of recommended
+  'await-requires-async': awaitRequiresAsync, // TODO: double-check that this should be in the recommended set
+  'deprecate-document-change-event': deprecateDocumentChangeEvent,
   'deprecate-sync-methods': deprecateSyncMethods,
   'deprecate-sync-prop-getters': deprecateSyncPropGetters,
   'deprecate-sync-prop-setters': deprecateSyncPropSetters,
