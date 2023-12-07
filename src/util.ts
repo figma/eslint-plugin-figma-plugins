@@ -1,31 +1,6 @@
 import { AST_NODE_TYPES, ESLintUtils, TSESLint, TSESTree } from '@typescript-eslint/utils'
 import ts from 'typescript'
 
-export function composedOfTypeWithName(t: ts.Type, typeName: string): boolean {
-  if (t.symbol && t.symbol.name === typeName) {
-    return true
-  }
-
-  if (t.aliasSymbol && t.aliasSymbol.name === typeName) {
-    return true
-  }
-
-  if (t.isUnion()) {
-    return t.types.some((t) => composedOfTypeWithName(t, typeName))
-  }
-
-  if (t.isIntersection()) {
-    return t.types.some((t) => composedOfTypeWithName(t, typeName))
-  }
-
-  const baseTypes = t.getBaseTypes()
-  if (baseTypes) {
-    return baseTypes.some((t) => composedOfTypeWithName(t, typeName))
-  }
-
-  return false
-}
-
 export const createPluginRule = ESLintUtils.RuleCreator(
   (name) => `https://github.com/figma/eslint-plugin-figma-plugins/src/rules/${name}.ts`,
 )
@@ -137,4 +112,29 @@ export function traverseTreeRecursive(
  */
 function isValidNode(x: unknown): x is TSESTree.Node {
   return typeof x === 'object' && x != null && 'type' in x && typeof x.type === 'string'
+}
+
+function composedOfTypeWithName(t: ts.Type, typeName: string): boolean {
+  if (t.symbol && t.symbol.name === typeName) {
+    return true
+  }
+
+  if (t.aliasSymbol && t.aliasSymbol.name === typeName) {
+    return true
+  }
+
+  if (t.isUnion()) {
+    return t.types.some((t) => composedOfTypeWithName(t, typeName))
+  }
+
+  if (t.isIntersection()) {
+    return t.types.some((t) => composedOfTypeWithName(t, typeName))
+  }
+
+  const baseTypes = t.getBaseTypes()
+  if (baseTypes) {
+    return baseTypes.some((t) => composedOfTypeWithName(t, typeName))
+  }
+
+  return false
 }
