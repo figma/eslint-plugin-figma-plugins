@@ -30,6 +30,11 @@ interface DeprecatedSyncPropSetter {
 
 export const deprecatedSyncPropSetters: DeprecatedSyncPropSetter[] = [
   {
+    property: 'currentPage',
+    replacement: 'setCurrentPageAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
     property: 'effectStyleId',
     replacement: 'setEffectStyleIdAsync',
     receiverTypes: ['BlendMixin'],
@@ -117,5 +122,15 @@ export const deprecatedSyncMethods: DeprecatedSyncMethod[] = [
     method: 'getLocalVariables',
     replacement: 'getLocalVariablesAsync',
     receiverTypes: ['VariablesAPI'],
+  },
+  {
+    method: 'setRangeTextStyle',
+    replacement: 'setRangeTextStyleIdAsync',
+    receiverTypes: ['NonResizableTextMixin'],
+  },
+  {
+    method: 'setRangeFillStyle',
+    replacement: 'setRangeFillStyleIdAsync',
+    receiverTypes: ['NonResizableTextMixin'],
   },
 ]
