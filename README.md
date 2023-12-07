@@ -76,8 +76,32 @@ Alternately, you can use your IDE's eslint extension to trigger the fixes on a p
 
 # Developing
 
-To compile the rules properly, run:
+## Building the package
+
+To compile the rules into a consumable eslint plugin, run:
 
 ```
 npm run watch
 ```
+
+Any consuming repo will need to re-install the package using the process described [above](#install-the-package).
+
+## Tests
+
+Tests are implemented in the [test/](./test) directory using [@typescript-eslint/RuleTester](https://typescript-eslint.io/packages/rule-tester/). Unlike a typical JS repo, we don't use a special test harness like jest. We just execute Node.js scripts that contain assertions in them.
+
+To run tests, run:
+
+```
+npm run tests
+```
+
+To run an individual test, run:
+
+```
+npx tsx ./test/NAME-OF-TEST.ts
+```
+
+# TODO
+
+- automated eslint rule doc generation
