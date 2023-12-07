@@ -63,7 +63,7 @@ export function traverseTree(
   traverseTreeRecursive(root, visitor)
 }
 
-export function traverseTreeRecursive(
+function traverseTreeRecursive(
   node: unknown,
   visitor: (node: TSESTree.Node) => TraverseTreeResult,
 ): TraverseTreeResult.Done | undefined {

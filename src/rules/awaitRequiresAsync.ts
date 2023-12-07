@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
-import { TraverseTreeResult, createPluginRule, traverseTreeRecursive } from '../util'
+import { TraverseTreeResult, createPluginRule, traverseTree } from '../util'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
@@ -52,7 +52,7 @@ export const awaitRequiresAsync = createPluginRule({
 function containsAwait(containingNode: TSESTree.Node): boolean {
   let found = false
 
-  traverseTreeRecursive(containingNode, (node: TSESTree.Node) => {
+  traverseTree(containingNode, (node: TSESTree.Node) => {
     if (node.type === AST_NODE_TYPES.AwaitExpression) {
       found = true
       return TraverseTreeResult.Done
