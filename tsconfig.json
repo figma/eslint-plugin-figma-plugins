@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "test/**/*"],
   "compilerOptions": {
     // @typescript-eslint/utils requires  the use of a modern module resolution strategy.
     // See: https://github.com/typescript-eslint/typescript-eslint/issues/7284

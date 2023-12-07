@@ -28,7 +28,7 @@ export const awaitRequiresAsync = createPluginRule({
     },
     fixable: 'code',
     messages: {
-      shouldBeAsync: 'Functions containing the await keyword should be marked async.',
+      requiresAsync: 'Functions containing the await keyword should be marked async.',
     },
     schema: [],
     type: 'problem',
@@ -74,7 +74,7 @@ function containsAwait(containingNode: TSESTree.Node): boolean {
 }
 
 function runRule<TOptions extends readonly unknown[]>(
-  context: TSESLint.RuleContext<'shouldBeAsync', TOptions>,
+  context: TSESLint.RuleContext<'requiresAsync', TOptions>,
   funcNode:
     | TSESTree.ArrowFunctionExpression
     | TSESTree.FunctionDeclaration
@@ -90,7 +90,7 @@ function runRule<TOptions extends readonly unknown[]>(
 
   context.report({
     node: funcNode,
-    messageId: 'shouldBeAsync',
+    messageId: 'requiresAsync',
     fix(fixer) {
       const src = context.sourceCode.getText(funcNode)
       return fixer.replaceText(funcNode, `async ${src}`)
