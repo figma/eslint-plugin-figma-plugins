@@ -64,15 +64,11 @@ export function traverseTree(
 }
 
 function traverseTreeRecursive(
-  node: unknown,
+  node: TSESTree.Node,
   visitor: (node: TSESTree.Node) => TraverseTreeResult,
 ): TraverseTreeResult.Done | undefined {
   // This algorithm is provided by:
   // github.com/typescript-eslint/typescript-eslint/blob/705370ac0d9c54081657b8855b398e57d6ea4ddb/packages/typescript-estree/src/simple-traverse.ts
-
-  if (!isValidNode(node)) {
-    return
-  }
 
   const result = visitor(node)
   if (result === TraverseTreeResult.Done) {
@@ -90,17 +86,21 @@ function traverseTreeRecursive(
       continue
     }
 
-    if (Array.isArray(childOrChildren)) {
+    if (isValidNode(childOrChildren)) {
+      if (traverseTreeRecursive(childOrChildren, visitor) === TraverseTreeResult.Done) {
+        return TraverseTreeResult.Done
+      }
+    } else if (Array.isArray(childOrChildren)) {
       for (const child of childOrChildren) {
+        if (!isValidNode(child)) {
+          // We're not in an array of children, so let's just skip this key
+          break
+        }
+
         if (traverseTreeRecursive(child, visitor) === TraverseTreeResult.Done) {
           return TraverseTreeResult.Done
         }
       }
-      continue
-    }
-
-    if (traverseTreeRecursive(childOrChildren, visitor) === TraverseTreeResult.Done) {
-      return TraverseTreeResult.Done
     }
   }
 }
