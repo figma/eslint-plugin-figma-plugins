@@ -55,19 +55,19 @@ export function addAsyncCallFix<TMessageIds extends string, TOptions extends rea
   return fixer.replaceText(expression, `await ${rcvSrc}.${asyncIdentifier}(${paramsSrc})`)
 }
 
-export function matchParentTypes<TMessageIds extends string, TOptions extends readonly unknown[]>(
+export function matchAncestorTypes<TMessageIds extends string, TOptions extends readonly unknown[]>(
   context: TSESLint.RuleContext<TMessageIds, TOptions>,
   node: TSESTree.Node,
-  parentTypes: string[],
+  ancestorTypes: string[],
 ):
   | {
       nodeType: ts.Type
-      matchedParentType: string
+      matchedAncestorType: string
     }
   | undefined {
   const type = ESLintUtils.getParserServices(context).getTypeAtLocation(node)
-  const match = parentTypes.find((name) => composedOfTypeWithName(type, name))
-  return match ? { nodeType: type, matchedParentType: match } : undefined
+  const match = ancestorTypes.find((name) => composedOfTypeWithName(type, name))
+  return match ? { nodeType: type, matchedAncestorType: match } : undefined
 }
 
 export enum TraverseTreeResult {

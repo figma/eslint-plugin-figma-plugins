@@ -1,121 +1,121 @@
 interface DeprecatedSyncPropGetter {
   property: string
   replacement: string
-  parentTypes: string[]
+  receiverTypes: string[]
 }
 
 export const deprecatedSyncPropGetters: DeprecatedSyncPropGetter[] = [
   {
     property: 'instances',
     replacement: 'getInstancesAsync',
-    parentTypes: ['ComponentNode'],
+    receiverTypes: ['ComponentNode'],
   },
   {
     property: 'consumers',
     replacement: 'getConsumersAsync',
-    parentTypes: ['BaseStyle'],
+    receiverTypes: ['BaseStyle'],
   },
   {
     property: 'mainComponent',
     replacement: 'getMainComponentAsync',
-    parentTypes: ['InstanceNode'],
+    receiverTypes: ['InstanceNode'],
   },
 ]
 
 interface DeprecatedSyncPropSetter {
   property: string
   replacement: string
-  parentTypes: string[]
+  receiverTypes: string[]
 }
 
 export const deprecatedSyncPropSetters: DeprecatedSyncPropSetter[] = [
   {
     property: 'effectStyleId',
     replacement: 'setEffectStyleIdAsync',
-    parentTypes: ['BlendMixin'],
+    receiverTypes: ['BlendMixin'],
   },
   {
     property: 'fillStyleId',
     replacement: 'setFillStyleIdAsync',
-    parentTypes: ['MinimalFillsMixin'],
+    receiverTypes: ['MinimalFillsMixin'],
   },
   {
     property: 'gridStyleId',
     replacement: 'setGridStyleIdAsync',
-    parentTypes: ['BaseFrameMixin'],
+    receiverTypes: ['BaseFrameMixin'],
   },
   {
     property: 'strokeStyleId',
     replacement: 'setStrokeStyleIdAsync',
-    parentTypes: ['MinimalStrokesMixin'],
+    receiverTypes: ['MinimalStrokesMixin'],
   },
   {
     property: 'textStyleId',
     replacement: 'setTextStyleIdAsync',
-    parentTypes: ['TextNode'],
+    receiverTypes: ['TextNode'],
   },
 ]
 
 interface DeprecatedSyncMethod {
   method: string
   replacement: string
-  parentTypes: string[]
+  receiverTypes: string[]
 }
 
 export const deprecatedSyncMethods: DeprecatedSyncMethod[] = [
   {
     method: 'getNodeById',
     replacement: 'getNodeByIdAsync',
-    parentTypes: ['PluginAPI'],
+    receiverTypes: ['PluginAPI'],
   },
   {
     method: 'getStyleById',
     replacement: 'getStyleById',
-    parentTypes: ['PluginAPI'],
+    receiverTypes: ['PluginAPI'],
   },
   {
     method: 'getFileThumbnailNode',
     replacement: 'getFileThumbnailNodeAsync',
-    parentTypes: ['PluginAPI'],
+    receiverTypes: ['PluginAPI'],
   },
   {
     method: 'getLocalTextStyles',
     replacement: 'getLocalTextStylesAsync',
-    parentTypes: ['PluginAPI'],
+    receiverTypes: ['PluginAPI'],
   },
   {
     method: 'getLocalPaintStyles',
     replacement: 'getLocalPaintStylesAsync',
-    parentTypes: ['PluginAPI'],
+    receiverTypes: ['PluginAPI'],
   },
   {
     method: 'getLocalEffectStyles',
     replacement: 'getLocalEffectStylesAsync',
-    parentTypes: ['PluginAPI'],
+    receiverTypes: ['PluginAPI'],
   },
   {
     method: 'getLocalGridStyles',
     replacement: 'getLocalGridStylesAsync',
-    parentTypes: ['PluginAPI'],
+    receiverTypes: ['PluginAPI'],
   },
   {
     method: 'getVariableById',
     replacement: 'getVariableByIdAsync',
-    parentTypes: ['VariablesAPI'],
+    receiverTypes: ['VariablesAPI'],
   },
   {
     method: 'getVariableCollectionById',
     replacement: 'getVariableCollectionByIdAsync',
-    parentTypes: ['VariablesAPI'],
+    receiverTypes: ['VariablesAPI'],
   },
   {
     method: 'getLocalVariableCollections',
     replacement: 'getLocalVariableCollectionsAsync',
-    parentTypes: ['VariablesAPI'],
+    receiverTypes: ['VariablesAPI'],
   },
   {
     method: 'getLocalVariables',
     replacement: 'getLocalVariablesAsync',
-    parentTypes: ['VariablesAPI'],
+    receiverTypes: ['VariablesAPI'],
   },
 ]
