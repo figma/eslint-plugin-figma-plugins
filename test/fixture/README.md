@@ -1,0 +1,3 @@
+This fixture is required for type-aware rule testing.
+
+See the [typescript-eslint docs](https://typescript-eslint.io/packages/rule-tester/#type-aware-testing) for more. This repo uses `RuleTester` from `@typescript-eslint/utils/ts-eslint` instead of `@typescript-eslint/rule-tester`. The former package requires fixture files named `estree.ts` and `estree.tsx` instead of `file.ts` and `file.tsx`. We should probably use the latter package, but it doesn't work without also installing a test framework like Jest. At current writing, I wasn't sure about the interaction between Jest and TypeScript, so I decided to hold off for now.
