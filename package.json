@@ -4,6 +4,7 @@
   "description": "typescript-eslint rules for Figma plugin development",
   "main": "dist/index.js",
   "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.build.json",
     "watch": "tsc -p tsconfig.build.json -w",
     "clean": "rm -rf dist",
     "test": "jest test/",
