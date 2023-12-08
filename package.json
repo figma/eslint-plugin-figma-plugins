@@ -4,7 +4,7 @@
   "description": "typescript-eslint rules for Figma plugin development",
   "main": "dist/index.js",
   "scripts": {
-    "watch": "tsc -w",
+    "watch": "tsc -p tsconfig.build.json -w",
     "clean": "rm -rf dist",
     "test": "jest test/",
     "test-workaround": "jest --detect-open-handles test/"
