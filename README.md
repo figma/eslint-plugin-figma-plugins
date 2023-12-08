@@ -10,7 +10,25 @@ It turns out that eslint has an enforced convention for plugin package names. Yo
 
 ## Install the package
 
-This package has not yet been published to NPM. Instead, you should clone this repo, and then add the following to your plugin's `package.json`:
+This package has not yet been published to NPM. You can get this in two ways:
+
+### Directly via git
+
+Add the following to your Figma plugin's `package.json`:
+
+```
+{
+  ...
+  "devDependencies": {
+    "@figma/eslint-plugin-figma-plugins": "git://github.com/figma/eslint-plugin-figma-plugins",
+    ...
+  }
+}
+```
+
+### From local disk
+
+Clone this repo. Then add the following to your Figma plugin's `package.json`:
 
 ```
 {
@@ -22,7 +40,9 @@ This package has not yet been published to NPM. Instead, you should clone this r
 }
 ```
 
-Then run `npm install`.
+### Update node_modules
+
+Once you've updated your `package.json`, run `npm install` to pull down the latest changes.
 
 ## Configure eslint
 
