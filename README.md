@@ -102,10 +102,13 @@ To run an invidual test, you can run Jest with the `-t` parameter, followed by t
 npx jest -t 'await-requires-async'
 ```
 
-Note: there is a bug where type-aware parsing in the tests currently exhibits different behavior than when the rules are actually run as a plugin. Here are some known issues with TypeScript parsing in the tests:
+Jest has an issue with printing errors emitted from eslint rules [due to a bug](https://github.com/jestjs/jest/issues/10577). If you are seeing errors like `TypeError: Converting circular structure to JSON`, then run this instead:
 
-- The `symbol` property is sometimes not defined on `ts.Type`. This could be related to a [TypeScript bug](https://github.com/microsoft/TypeScript/issues/13165), but it's unclear why it only occurs in tests. As a result, our rules use a custom `getTypeName()` utility function that returns symbol names using fallback sources of data.
-- Ternary expressions parse into `any` types if the result expressions contain types that are not explicitly defined. For example, if `a` and `b` are function parameters with the `PluginAPI` type, the ternary `(true ? a : b)` will carry an `any` type unless the code also includes an explicit definition of the `PluginAPI` type.
+```
+npm run test-workaround
+```
+
+This enables the `--detect-open-handles` Jest option. Tests will run slower, but you'll see the real cause of the errors.
 
 # TODO
 

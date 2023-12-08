@@ -6,7 +6,8 @@
   "scripts": {
     "watch": "tsc -w",
     "clean": "rm -rf dist",
-    "test": "jest test/"
+    "test": "jest test/",
+    "test-workaround": "jest --detect-open-handles test/"
   },
   "repository": {
     "type": "git",

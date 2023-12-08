@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
-import { addAsyncCallFix, createPluginRule, matchAncestorTypes } from '../util'
+import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } from '../util'
 import { deprecatedSyncPropGetters } from '../ruleData'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
@@ -44,7 +44,7 @@ export const deprecateSyncPropGetters = createPluginRule({
           node,
           messageId: 'useReplacement',
           data: {
-            receiverType: match.nodeType.symbol.name,
+            receiverType: getTypeName(match.nodeType, match.matchedAncestorType),
             property: deprecation.property,
             replacement: deprecation.replacement,
           },

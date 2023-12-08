@@ -140,8 +140,13 @@ function composedOfTypeWithName(t: ts.Type, typeName: string): boolean {
 }
 
 /**
- * When running these rules from tests, sometimes a TypeScript Type object's symbol property is undefined.
- * This may be due to this bug: https://github.com/microsoft/TypeScript/issues/13165
+ * When running these rules from tests, sometimes a TypeScript Type object's
+ * symbol property is undefined, contrary to the type declaration. This seems to
+ * happen when an expression has a named type, but the type does not to resolve
+ * to anything that the typechecker knows about.
+ *
+ * The discrepancy between the compiler API and its type definitions may be due
+ * to this bug: https://github.com/microsoft/TypeScript/issues/13165
  *
  * As a workaround, we use two fallbacks, in order of priority:
  * - aliasSymbol.escapedName

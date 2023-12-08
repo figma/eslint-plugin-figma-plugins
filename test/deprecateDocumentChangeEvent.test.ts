@@ -1,10 +1,19 @@
 import { deprecateDocumentChangeEvent } from '../src/rules/deprecateDocumentChangeEvent'
 import { ruleTester } from './testUtil'
 
+const types = `
+interface PluginAPI {
+  on(event: string): void
+  once(event: string): void
+  off(event: string): void
+}
+`
+
 ruleTester().run('deprecate-document-change-event', deprecateDocumentChangeEvent, {
   valid: [
     {
       code: `
+${types}
 function func(figma: PluginAPI)  {
   figma.on('selectionchange')
 }
@@ -12,6 +21,7 @@ function func(figma: PluginAPI)  {
     },
     {
       code: `
+${types}
 function func(figma: PluginAPI)  {
   figma.once('selectionchange')
 }
@@ -19,6 +29,7 @@ function func(figma: PluginAPI)  {
     },
     {
       code: `
+${types}
 function func(figma: PluginAPI)  {
   figma.off('selectionchange')
 }
@@ -35,6 +46,7 @@ function func(notFigma: NotPluginAPI) {
   invalid: [
     {
       code: `
+${types}
 function func(figma: PluginAPI)  {
   figma.on('documentchange')
 }
@@ -43,6 +55,7 @@ function func(figma: PluginAPI)  {
     },
     {
       code: `
+${types}
 function func(figma: PluginAPI)  {
   figma.once('documentchange')
 }
@@ -51,6 +64,7 @@ function func(figma: PluginAPI)  {
     },
     {
       code: `
+${types}
 function func(figma: PluginAPI)  {
   figma.off('documentchange')
 }

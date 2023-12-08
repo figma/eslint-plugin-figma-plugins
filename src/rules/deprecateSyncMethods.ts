@@ -49,7 +49,7 @@ export const deprecateSyncMethods = createPluginRule({
           node,
           messageId: 'useReplacement',
           data: {
-            receiverType: getTypeName(match.nodeType, deprecation.replacement),
+            receiverType: getTypeName(match.nodeType, match.matchedAncestorType),
             method: deprecation.method,
             replacement: deprecation.replacement,
           },
