@@ -155,3 +155,11 @@ function composedOfTypeWithName(t: ts.Type, typeName: string): boolean {
 export function getTypeName(t: ts.Type, fallback: string): string {
   return t.symbol?.name ?? t.aliasSymbol?.escapedName ?? fallback
 }
+
+export function isStringNode<TMessageIds extends string, TOptions extends readonly unknown[]>(
+  context: TSESLint.RuleContext<TMessageIds, TOptions>,
+  node: TSESTree.Node,
+): boolean {
+  const type = ESLintUtils.getParserServices(context).getTypeAtLocation(node)
+  return !!(type.flags & ts.TypeFlags.StringLike)
+}
