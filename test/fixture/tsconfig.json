@@ -2,5 +2,5 @@
   "compilerOptions": {
     "strict": true
   },
-  "include": ["estree.ts", "estree.tsx"]
+  "include": ["file.ts", "file.tsx"]
 }

@@ -1,4 +1,4 @@
-import { RuleTester } from '@typescript-eslint/utils/ts-eslint'
+import { RuleTester } from '@typescript-eslint/rule-tester'
 import * as path from 'path'
 
 export function ruleTester(): RuleTester {

@@ -88,7 +88,7 @@ Any consuming repo will need to re-install the package using the process describ
 
 ## Tests
 
-Tests are implemented in the [test/](./test) directory using [@typescript-eslint/RuleTester](https://typescript-eslint.io/packages/rule-tester/). Unlike a typical JS repo, we don't use a special test harness like jest. We just execute Node.js scripts that contain assertions in them.
+Tests are implemented in the [test/](./test) directory using [@typescript-eslint/RuleTester](https://typescript-eslint.io/packages/rule-tester/). The test harness is [ts-jest]().
 
 To run tests, run:
 
@@ -96,11 +96,16 @@ To run tests, run:
 npm run tests
 ```
 
-To run an individual test, run:
+To run an invidual test, you can run Jest with the `-t` parameter, followed by the string handle for the test. The handle is declared in each test file. Example:
 
 ```
-npx tsx ./test/NAME-OF-TEST.ts
+npx jest -t 'await-requires-async'
 ```
+
+Note: there is a bug where type-aware parsing in the tests currently exhibits different behavior than when the rules are actually run as a plugin. Here are some known issues with TypeScript parsing in the tests:
+
+- The `symbol` property is sometimes not defined on `ts.Type`. This could be related to a [TypeScript bug](https://github.com/microsoft/TypeScript/issues/13165), but it's unclear why it only occurs in tests. As a result, our rules use a custom `getTypeName()` utility function that returns symbol names using fallback sources of data.
+- Ternary expressions parse into `any` types if the result expressions contain types that are not explicitly defined. For example, if `a` and `b` are function parameters with the `PluginAPI` type, the ternary `(true ? a : b)` will carry an `any` type unless the code also includes an explicit definition of the `PluginAPI` type.
 
 # TODO
 
