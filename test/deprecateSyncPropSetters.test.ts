@@ -52,13 +52,13 @@ ${types}
 function func(getLineNode: () => LineNode) {
   getLineNode().effectStyleId = '1'
 }
-    `,
+`,
       output: `
 ${types}
 function func(getLineNode: () => LineNode) {
   await getLineNode().setEffectStyleIdAsync('1')
 }
-    `,
+`,
       errors: [{ messageId: 'useReplacement' }],
     },
     {
@@ -82,13 +82,13 @@ ${types}
 function func(a: LineNode, b: LineNode) {
   ;(true ? a : b).effectStyleId = '1'
 }
-    `,
+`,
       output: `
 ${types}
 function func(a: LineNode, b: LineNode) {
   ;await (true ? a : b).setEffectStyleIdAsync('1')
 }
-    `,
+`,
       errors: [{ messageId: 'useReplacement' }],
     },
   ],

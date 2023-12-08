@@ -11,22 +11,22 @@ interface VariablesAPI {
 
 ruleTester().run('deprecate-sync-methods', deprecateIdParams, {
   valid: [
-    //     {
-    //       code: `
-    // ${types}
-    // function func(notVariables: NotVariablesAPI) {
-    //   notVariables.createVariable('name', '123')
-    // }
-    // `,
-    //     },
-    //     {
-    //       code: `
-    // ${types}
-    // function func(variables: VariablesAPI) {
-    //   variables.nonDeprecatedMethod('123')
-    // }
-    // `,
-    //     },
+    {
+      code: `
+${types}
+function func(notVariables: NotVariablesAPI) {
+  notVariables.createVariable('name', '123')
+}
+`,
+    },
+    {
+      code: `
+${types}
+function func(variables: VariablesAPI) {
+  variables.nonDeprecatedMethod('123')
+}
+`,
+    },
   ],
   invalid: [
     {

@@ -50,13 +50,13 @@ ${types}
 function func(getComponentNode: () => ComponentNode) {
   getComponentNode().instances
 }
-    `,
+`,
       output: `
 ${types}
 function func(getComponentNode: () => ComponentNode) {
   await getComponentNode().getInstancesAsync()
 }
-    `,
+`,
       errors: [{ messageId: 'useReplacement' }],
     },
     {
@@ -80,13 +80,13 @@ ${types}
 function func(a: ComponentNode, b: ComponentNode) {
   ;(true ? a : b).instances
 }
-    `,
+`,
       output: `
 ${types}
 function func(a: ComponentNode, b: ComponentNode) {
   ;await (true ? a : b).getInstancesAsync()
 }
-    `,
+`,
       errors: [{ messageId: 'useReplacement' }],
     },
   ],
