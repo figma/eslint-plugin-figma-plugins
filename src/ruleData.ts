@@ -59,6 +59,11 @@ export const deprecatedSyncPropSetters: DeprecatedSyncPropSetter[] = [
     replacement: 'setTextStyleIdAsync',
     receiverTypes: ['TextNode'],
   },
+  {
+    property: 'backgroundStyleId',
+    replacement: 'setFillStyleIdAsync',
+    receiverTypes: ['DeprecatedBackgroundMixin'],
+  },
 ]
 
 interface DeprecatedSyncMethod {

@@ -9,6 +9,16 @@ interface BlendMixin {
 interface DefaultShapeMixin extends BlendMixin {}
 
 interface LineNode extends DefaultShapeMixin {}
+
+interface DeprecatedBackgroundMixin {
+  backgroundStyleId: string
+}
+
+interface BaseFrameMixin extends DeprecatedBackgroundMixin {}
+
+interface DefaultFrameMixin extends BaseFrameMixin {}
+
+interface FrameNode extends DefaultFrameMixin {}
 `
 
 ruleTester().run('deprecate-sync-prop-setters', deprecateSyncPropSetters, {
@@ -77,8 +87,6 @@ function func(lineNode: LineNode) {
       errors: [{ messageId: 'useReplacement' }],
     },
     {
-      // For some reason, the ternary expressions below will evaluate to `any`
-      // unless the `PluginAPI` type is defined explicitly.
       code: `
 ${types}
 function func(a: LineNode, b: LineNode) {
@@ -91,6 +99,22 @@ function func(a: LineNode, b: LineNode) {
   ;await (true ? a : b).setEffectStyleIdAsync('1')
 }
     `,
+      errors: [{ messageId: 'useReplacement' }],
+    },
+    {
+      // This performs an inheritance test
+      code: `
+${types}
+function func(frameNode: FrameNode) {
+  frameNode.backgroundStyleId = '1'
+}
+`,
+      output: `
+${types}
+function func(frameNode: FrameNode) {
+  await frameNode.setFillStyleIdAsync('1')
+}
+`,
       errors: [{ messageId: 'useReplacement' }],
     },
   ],

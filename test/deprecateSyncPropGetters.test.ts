@@ -75,8 +75,6 @@ function func(componentNode: ComponentNode) {
       errors: [{ messageId: 'useReplacement' }],
     },
     {
-      // For some reason, the ternary expressions below will evaluate to `any`
-      // unless the `PluginAPI` type is defined explicitly.
       code: `
 ${types}
 function func(a: ComponentNode, b: ComponentNode) {
