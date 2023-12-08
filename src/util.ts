@@ -30,16 +30,16 @@ export function addAsyncCallFix<TMessageIds extends string, TOptions extends rea
   return fixer.replaceText(expression, `await ${rcvSrc}.${asyncIdentifier}(${paramsSrc})`)
 }
 
+export interface MatchAncestorTypeResult {
+  nodeType: ts.Type
+  matchedAncestorType: string
+}
+
 export function matchAncestorTypes<TMessageIds extends string, TOptions extends readonly unknown[]>(
   context: TSESLint.RuleContext<TMessageIds, TOptions>,
   node: TSESTree.Node,
   ancestorTypes: string[],
-):
-  | {
-      nodeType: ts.Type
-      matchedAncestorType: string
-    }
-  | undefined {
+): MatchAncestorTypeResult | undefined {
   const type = ESLintUtils.getParserServices(context).getTypeAtLocation(node)
   const match = ancestorTypes.find((name) => composedOfTypeWithName(type, name))
   return match ? { nodeType: type, matchedAncestorType: match } : undefined
@@ -137,4 +137,16 @@ function composedOfTypeWithName(t: ts.Type, typeName: string): boolean {
   }
 
   return false
+}
+
+/**
+ * When running these rules from tests, sometimes a TypeScript Type object's symbol property is undefined.
+ * This may be due to this bug: https://github.com/microsoft/TypeScript/issues/13165
+ *
+ * As a workaround, we use two fallbacks, in order of priority:
+ * - aliasSymbol.escapedName
+ * - the fallback argument, which is should be the type we searched for in matchAncestorTypes()
+ */
+export function getTypeName(t: ts.Type, fallback: string): string {
+  return t.symbol?.name ?? t.aliasSymbol?.escapedName ?? fallback
 }
