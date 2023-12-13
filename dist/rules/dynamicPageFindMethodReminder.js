@@ -11,7 +11,7 @@ exports.dynamicPageFindMethodReminder = (0, util_1.createPluginRule)({
             description: 'Reminder to call loadPagesAsync() before calling find*() methods',
         },
         messages: {
-            reminder: 'When using the dynamic-page manifest field, remember to call figma.loadPagesAsync() before using DocumentNode.{{method}}(). It only needs to be called once.',
+            reminder: 'When using the dynamic-page manifest field, remember to call figma.loadPagesAsync() before using DocumentNode.{{method}}(). loadPagesAsync() only needs to be called once.',
         },
         schema: [],
         type: 'suggestion',
