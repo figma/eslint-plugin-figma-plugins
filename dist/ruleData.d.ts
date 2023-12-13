@@ -1,27 +1,27 @@
-interface DeprecatedIdParam {
+interface DynamicPageBannedIdParam {
     receiverType: string;
     method: string;
     paramIndex: number;
     wantParamType: string;
     asyncObjectFetch: string;
 }
-export declare const deprecatedIdParams: DeprecatedIdParam[];
-interface DeprecatedSyncMethod {
+export declare const dynamicPageBannedIdParams: DynamicPageBannedIdParam[];
+interface DynamicPageBannedSyncMethod {
     method: string;
     replacement: string;
     receiverTypes: string[];
 }
-export declare const deprecatedSyncMethods: DeprecatedSyncMethod[];
-interface DeprecatedSyncPropGetter {
+export declare const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[];
+interface DynamicPageBannedSyncPropGetter {
     property: string;
     replacement: string;
     receiverTypes: string[];
 }
-export declare const deprecatedSyncPropGetters: DeprecatedSyncPropGetter[];
-interface DeprecatedSyncPropSetter {
+export declare const dynamicPageBannedSyncPropGetters: DynamicPageBannedSyncPropGetter[];
+interface DynamicPageBannedSyncPropSetter {
     property: string;
     replacement: string;
     receiverTypes: string[];
 }
-export declare const deprecatedSyncPropSetters: DeprecatedSyncPropSetter[];
+export declare const dynamicPageBannedSyncPropSetters: DynamicPageBannedSyncPropSetter[];
 export {};

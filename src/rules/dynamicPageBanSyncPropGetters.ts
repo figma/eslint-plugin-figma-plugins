@@ -1,21 +1,22 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
 import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } from '../util'
-import { deprecatedSyncPropGetters } from '../ruleData'
+import { dynamicPageBannedSyncPropGetters } from '../ruleData'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-export const deprecateSyncPropGetters = createPluginRule({
-  name: 'deprecate-sync-prop-getters',
+export const dynamicPageBanSyncPropGetters = createPluginRule({
+  name: 'dynamic-page-ban-sync-prop-getters',
   meta: {
     docs: {
-      description: 'Deprecated synchronous property getter',
+      description:
+        'Ban synchronous property getters that are not compatible with the dynamic-page manifest option.',
     },
     fixable: 'code',
     messages: {
       useReplacement:
-        '{{receiverType}}.{{property}} is deprecated. Please use {{replacement}} instead.',
+        '{{receiverType}}.{{property}} is not compatible with the dynamic-page manifest option. Please use {{replacement}} instead.',
     },
     schema: [],
     type: 'problem',
@@ -29,7 +30,7 @@ export const deprecateSyncPropGetters = createPluginRule({
           return
         }
 
-        const deprecation = deprecatedSyncPropGetters.find((g) => g.property === prop.name)
+        const deprecation = dynamicPageBannedSyncPropGetters.find((g) => g.property === prop.name)
         if (!deprecation) {
           return
         }

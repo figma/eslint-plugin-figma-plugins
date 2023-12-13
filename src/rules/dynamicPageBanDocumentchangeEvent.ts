@@ -5,11 +5,12 @@ import { createPluginRule, matchAncestorTypes } from '../util'
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-export const deprecateDocumentChangeEvent = createPluginRule({
-  name: 'deprecate-document-change-event',
+export const dynamicPageBanDocumentchangeEvent = createPluginRule({
+  name: 'dynamic-page-ban-documentchange-event',
   meta: {
     docs: {
-      description: 'Deprecated documentchange event',
+      description:
+        'Ban the documentchange event, which is not compatible with the dynamic-page manifest option.',
     },
     messages: {
       onReplacement: `The 'documentchange' event is deprecated. Please use PageNode.on('nodechange') or figma.on('stylechange') instead.`,

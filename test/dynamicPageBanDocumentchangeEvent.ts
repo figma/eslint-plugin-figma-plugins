@@ -1,4 +1,4 @@
-import { deprecateDocumentChangeEvent } from '../src/rules/deprecateDocumentChangeEvent'
+import { dynamicPageBanDocumentchangeEvent } from '../src/rules/dynamicPageBanDocumentchangeEvent'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -9,7 +9,7 @@ interface PluginAPI {
 }
 `
 
-ruleTester().run('deprecate-document-change-event', deprecateDocumentChangeEvent, {
+ruleTester().run('dynamic-page-ban-documentchange-event', dynamicPageBanDocumentchangeEvent, {
   valid: [
     {
       code: `

@@ -1,21 +1,22 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
-import { createPluginRule, getTypeName, isStringNode, matchAncestorTypes } from '../util'
-import { deprecatedIdParams } from '../ruleData'
+import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } from '../util'
+import { dynamicPageBannedSyncMethods } from '../ruleData'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-export const deprecateIdParams = createPluginRule({
-  name: 'deprecate-id-params',
+export const dynamicPageBanSyncMethods = createPluginRule({
+  name: 'dynamic-page-ban-sync-methods',
   meta: {
     docs: {
-      description: 'Deprecated ID parameters',
+      description:
+        'Ban synchronous methods that are not compatible with the dynamic-page manifest option.',
     },
     fixable: 'code',
     messages: {
       useReplacement:
-        'Passing a string ID for parameter {{humanReadableParamIndex}} to {{receiverType}}.{{method}} is deprecated. Please pass a {{wantParamType}} instead.',
+        '{{receiverType}}.{{method}} is not compatible with the dynamic-page manifest option. Please use {{replacement}} instead.',
     },
     schema: [],
     type: 'problem',
@@ -34,23 +35,14 @@ export const deprecateIdParams = createPluginRule({
           return
         }
 
-        const deprecation = deprecatedIdParams.find((p) => p.method === calleeProp.name)
+        const deprecation = dynamicPageBannedSyncMethods.find((m) => m.method === calleeProp.name)
         if (!deprecation) {
           return
         }
 
         const receiver = callee.object
-        const match = matchAncestorTypes(context, receiver, [deprecation.receiverType])
+        const match = matchAncestorTypes(context, receiver, deprecation.receiverTypes)
         if (!match) {
-          return
-        }
-
-        const arg = node.arguments[deprecation.paramIndex]
-        if (!arg) {
-          return
-        }
-
-        if (!isStringNode(context, arg)) {
           return
         }
 
@@ -58,14 +50,19 @@ export const deprecateIdParams = createPluginRule({
           node,
           messageId: 'useReplacement',
           data: {
-            humanReadableParamIndex: deprecation.paramIndex + 1,
             receiverType: getTypeName(match.nodeType, match.matchedAncestorType),
             method: deprecation.method,
-            wantParamType: deprecation.wantParamType,
+            replacement: deprecation.replacement,
           },
           fix(fixer) {
-            const argText = context.sourceCode.getText(arg)
-            return fixer.replaceText(arg, `await ${deprecation.asyncObjectFetch}(${argText})`)
+            return addAsyncCallFix({
+              context,
+              fixer,
+              expression: node,
+              receiver: receiver,
+              asyncIdentifier: deprecation.replacement,
+              args: node.arguments,
+            })
           },
         })
       },

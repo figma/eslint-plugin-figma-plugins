@@ -1,4 +1,4 @@
-import { deprecateSyncPropSetters } from '../src/rules/deprecateSyncPropSetters'
+import { dynamicPageBanSyncPropSetters } from '../src/rules/dynamicPageBanSyncPropSetters'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -11,7 +11,7 @@ interface DefaultShapeMixin extends BlendMixin {}
 interface LineNode extends DefaultShapeMixin {}
 `
 
-ruleTester().run('deprecate-sync-prop-setters', deprecateSyncPropSetters, {
+ruleTester().run('dynamic-page-ban-sync-prop-setters', dynamicPageBanSyncPropSetters, {
   valid: [
     {
       code: `

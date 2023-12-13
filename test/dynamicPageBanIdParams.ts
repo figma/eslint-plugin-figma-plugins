@@ -1,4 +1,4 @@
-import { deprecateIdParams } from '../src/rules/deprecateIdParams'
+import { dynamicPageBanIdParams } from '../src/rules/dynamicPageBanIdParams'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -9,7 +9,7 @@ interface VariablesAPI {
 }
 `
 
-ruleTester().run('deprecate-sync-methods', deprecateIdParams, {
+ruleTester().run('dynamicPageBanIdParams', dynamicPageBanIdParams, {
   valid: [
     {
       code: `

@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deprecateDocumentChangeEvent = void 0;
+exports.dynamicPageBanDocumentchangeEvent = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
-exports.deprecateDocumentChangeEvent = (0, util_1.createPluginRule)({
-    name: 'deprecate-document-change-event',
+exports.dynamicPageBanDocumentchangeEvent = (0, util_1.createPluginRule)({
+    name: 'dynamic-page-ban-documentchange-event',
     meta: {
         docs: {
-            description: 'Deprecated documentchange event',
+            description: 'Ban the documentchange event, which is not compatible with the dynamic-page manifest option.',
         },
         messages: {
             onReplacement: `The 'documentchange' event is deprecated. Please use PageNode.on('nodechange') or figma.on('stylechange') instead.`,

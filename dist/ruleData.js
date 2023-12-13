@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deprecatedSyncPropSetters = exports.deprecatedSyncPropGetters = exports.deprecatedSyncMethods = exports.deprecatedIdParams = void 0;
-exports.deprecatedIdParams = [
+exports.dynamicPageBannedSyncPropSetters = exports.dynamicPageBannedSyncPropGetters = exports.dynamicPageBannedSyncMethods = exports.dynamicPageBannedIdParams = void 0;
+exports.dynamicPageBannedIdParams = [
     {
         receiverType: 'VariablesAPI',
         method: 'createVariable',
@@ -10,7 +10,7 @@ exports.deprecatedIdParams = [
         asyncObjectFetch: 'figma.variables.getVariableCollectionByIdAsync',
     },
 ];
-exports.deprecatedSyncMethods = [
+exports.dynamicPageBannedSyncMethods = [
     {
         method: 'getNodeById',
         replacement: 'getNodeByIdAsync',
@@ -77,7 +77,7 @@ exports.deprecatedSyncMethods = [
         receiverTypes: ['NonResizableTextMixin'],
     },
 ];
-exports.deprecatedSyncPropGetters = [
+exports.dynamicPageBannedSyncPropGetters = [
     {
         property: 'instances',
         replacement: 'getInstancesAsync',
@@ -94,7 +94,7 @@ exports.deprecatedSyncPropGetters = [
         receiverTypes: ['InstanceNode'],
     },
 ];
-exports.deprecatedSyncPropSetters = [
+exports.dynamicPageBannedSyncPropSetters = [
     {
         property: 'currentPage',
         replacement: 'setCurrentPageAsync',

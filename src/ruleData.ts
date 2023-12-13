@@ -1,4 +1,4 @@
-interface DeprecatedIdParam {
+interface DynamicPageBannedIdParam {
   receiverType: string
   method: string
   paramIndex: number
@@ -6,7 +6,7 @@ interface DeprecatedIdParam {
   asyncObjectFetch: string
 }
 
-export const deprecatedIdParams: DeprecatedIdParam[] = [
+export const dynamicPageBannedIdParams: DynamicPageBannedIdParam[] = [
   {
     receiverType: 'VariablesAPI',
     method: 'createVariable',
@@ -16,13 +16,13 @@ export const deprecatedIdParams: DeprecatedIdParam[] = [
   },
 ]
 
-interface DeprecatedSyncMethod {
+interface DynamicPageBannedSyncMethod {
   method: string
   replacement: string
   receiverTypes: string[]
 }
 
-export const deprecatedSyncMethods: DeprecatedSyncMethod[] = [
+export const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
   {
     method: 'getNodeById',
     replacement: 'getNodeByIdAsync',
@@ -90,13 +90,13 @@ export const deprecatedSyncMethods: DeprecatedSyncMethod[] = [
   },
 ]
 
-interface DeprecatedSyncPropGetter {
+interface DynamicPageBannedSyncPropGetter {
   property: string
   replacement: string
   receiverTypes: string[]
 }
 
-export const deprecatedSyncPropGetters: DeprecatedSyncPropGetter[] = [
+export const dynamicPageBannedSyncPropGetters: DynamicPageBannedSyncPropGetter[] = [
   {
     property: 'instances',
     replacement: 'getInstancesAsync',
@@ -114,13 +114,13 @@ export const deprecatedSyncPropGetters: DeprecatedSyncPropGetter[] = [
   },
 ]
 
-interface DeprecatedSyncPropSetter {
+interface DynamicPageBannedSyncPropSetter {
   property: string
   replacement: string
   receiverTypes: string[]
 }
 
-export const deprecatedSyncPropSetters: DeprecatedSyncPropSetter[] = [
+export const dynamicPageBannedSyncPropSetters: DynamicPageBannedSyncPropSetter[] = [
   {
     property: 'currentPage',
     replacement: 'setCurrentPageAsync',

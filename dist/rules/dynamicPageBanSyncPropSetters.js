@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deprecateSyncPropSetters = void 0;
+exports.dynamicPageBanSyncPropSetters = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
 const ruleData_1 = require("../ruleData");
-exports.deprecateSyncPropSetters = (0, util_1.createPluginRule)({
-    name: 'deprecate-sync-prop-setters',
+exports.dynamicPageBanSyncPropSetters = (0, util_1.createPluginRule)({
+    name: 'dynamic-page-ban-sync-prop-setters',
     meta: {
         docs: {
-            description: 'Deprecated synchronous property setter',
+            description: 'Ban synchronous property getters that are not compatible with the dynamic-page manifest option.',
         },
         fixable: 'code',
         messages: {
@@ -28,7 +28,7 @@ exports.deprecateSyncPropSetters = (0, util_1.createPluginRule)({
                 if (prop.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
                 }
-                const deprecation = ruleData_1.deprecatedSyncPropSetters.find((s) => s.property === prop.name);
+                const deprecation = ruleData_1.dynamicPageBannedSyncPropSetters.find((s) => s.property === prop.name);
                 if (!deprecation) {
                     return;
                 }

@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deprecateSyncMethods = void 0;
+exports.dynamicPageBanSyncMethods = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
 const ruleData_1 = require("../ruleData");
-exports.deprecateSyncMethods = (0, util_1.createPluginRule)({
-    name: 'deprecate-sync-methods',
+exports.dynamicPageBanSyncMethods = (0, util_1.createPluginRule)({
+    name: 'dynamic-page-ban-sync-methods',
     meta: {
         docs: {
-            description: 'Deprecated synchronous method',
+            description: 'Ban synchronous methods that are not compatible with the dynamic-page manifest option.',
         },
         fixable: 'code',
         messages: {
-            useReplacement: '{{receiverType}}.{{method}} is deprecated. Please use {{replacement}} instead.',
+            useReplacement: '{{receiverType}}.{{method}} is not compatible with the dynamic-page manifest option. Please use {{replacement}} instead.',
         },
         schema: [],
         type: 'problem',
@@ -29,7 +29,7 @@ exports.deprecateSyncMethods = (0, util_1.createPluginRule)({
                 if (calleeProp.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
                 }
-                const deprecation = ruleData_1.deprecatedSyncMethods.find((m) => m.method === calleeProp.name);
+                const deprecation = ruleData_1.dynamicPageBannedSyncMethods.find((m) => m.method === calleeProp.name);
                 if (!deprecation) {
                     return;
                 }

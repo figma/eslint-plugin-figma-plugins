@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deprecateIdParams = void 0;
+exports.dynamicPageBanIdParams = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
 const ruleData_1 = require("../ruleData");
-exports.deprecateIdParams = (0, util_1.createPluginRule)({
-    name: 'deprecate-id-params',
+exports.dynamicPageBanIdParams = (0, util_1.createPluginRule)({
+    name: 'dynamic-page-ban-id-params',
     meta: {
         docs: {
-            description: 'Deprecated ID parameters',
+            description: 'Ban string ID parameters that are not compatible with the dynamic-page manifest option.',
         },
         fixable: 'code',
         messages: {
@@ -29,7 +29,7 @@ exports.deprecateIdParams = (0, util_1.createPluginRule)({
                 if (calleeProp.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
                 }
-                const deprecation = ruleData_1.deprecatedIdParams.find((p) => p.method === calleeProp.name);
+                const deprecation = ruleData_1.dynamicPageBannedIdParams.find((p) => p.method === calleeProp.name);
                 if (!deprecation) {
                     return;
                 }

@@ -1,9 +1,9 @@
-import { deprecateSyncPropGetters } from './rules/deprecateSyncPropGetters'
-import { deprecateSyncMethods } from './rules/deprecateSyncMethods'
-import { deprecateSyncPropSetters } from './rules/deprecateSyncPropSetters'
+import { dynamicPageBanSyncPropGetters } from './rules/dynamicPageBanSyncPropGetters'
+import { dynamicPageBanSyncMethods } from './rules/dynamicPageBanSyncMethods'
+import { dynamicPageBanSyncPropSetters } from './rules/dynamicPageBanSyncPropSetters'
 import { awaitRequiresAsync } from './rules/awaitRequiresAsync'
-import { deprecateDocumentChangeEvent } from './rules/deprecateDocumentChangeEvent'
-import { deprecateIdParams } from './rules/deprecateIdParams'
+import { dynamicPageBanDocumentchangeEvent } from './rules/dynamicPageBanDocumentchangeEvent'
+import { dynamicPageBanIdParams } from './rules/dynamicPageBanIdParams'
 
 function ruleset(type: string, rules: Record<string, unknown>): Record<string, string> {
   return Object.keys(rules).reduce((acc, name) => {
@@ -12,13 +12,13 @@ function ruleset(type: string, rules: Record<string, unknown>): Record<string, s
   }, {} as Record<string, string>)
 }
 
-const errorRules: Record<string, unknown> = {
+const dynamicPageRules: Record<string, unknown> = {
   'await-requires-async': awaitRequiresAsync,
-  'deprecate-document-change-event': deprecateDocumentChangeEvent,
-  'deprecate-id-params': deprecateIdParams,
-  'deprecate-sync-methods': deprecateSyncMethods,
-  'deprecate-sync-prop-getters': deprecateSyncPropGetters,
-  'deprecate-sync-prop-setters': deprecateSyncPropSetters,
+  'dynamic-page-ban-documentchange-event': dynamicPageBanDocumentchangeEvent,
+  'dynamic-page-ban-id-params': dynamicPageBanIdParams,
+  'dynamic-page-ban-sync-methods': dynamicPageBanSyncMethods,
+  'dynamic-page-ban-sync-prop-getters': dynamicPageBanSyncPropGetters,
+  'dynamic-page-ban-sync-prop-setters': dynamicPageBanSyncPropSetters,
 }
 
 // The exported type annotations in this file are somewhat arbitrary; we do NOT
@@ -26,11 +26,11 @@ const errorRules: Record<string, unknown> = {
 // @figma as a type root, and all packages under a type root must emit a type
 // declaration file.
 
-export const rules: unknown = { ...errorRules }
+export const rules: unknown = { ...dynamicPageRules }
 
 export const configs: unknown = {
-  recommended: {
+  'dynamic-page': {
     plugins: ['@figma/figma-plugins'],
-    rules: { ...ruleset('error', errorRules) },
+    rules: { ...ruleset('error', dynamicPageRules) },
   },
 }

@@ -1,4 +1,4 @@
-import { deprecateSyncMethods } from '../src/rules/deprecateSyncMethods'
+import { dynamicPageBanSyncMethods } from '../src/rules/dynamicPageBanSyncMethods'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -9,7 +9,7 @@ interface PluginAPI {
 }
 `
 
-ruleTester().run('deprecate-sync-methods', deprecateSyncMethods, {
+ruleTester().run('dynamic-page-ban-sync-methods', dynamicPageBanSyncMethods, {
   valid: [
     {
       code: `

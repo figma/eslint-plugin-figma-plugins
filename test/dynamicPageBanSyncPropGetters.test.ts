@@ -1,4 +1,4 @@
-import { deprecateSyncPropGetters } from '../src/rules/deprecateSyncPropGetters'
+import { dynamicPageBanSyncPropGetters } from '../src/rules/dynamicPageBanSyncPropGetters'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -9,7 +9,7 @@ interface ComponentNode {
 }
 `
 
-ruleTester().run('deprecate-sync-prop-getters', deprecateSyncPropGetters, {
+ruleTester().run('dynamic-page-ban-sync-prop-getters', dynamicPageBanSyncPropGetters, {
   valid: [
     {
       code: `
