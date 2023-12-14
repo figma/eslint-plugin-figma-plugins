@@ -5,6 +5,10 @@ export const createPluginRule = ESLintUtils.RuleCreator(
   (name) => `https://github.com/figma/eslint-plugin-figma-plugins/src/rules/${name}.ts`,
 )
 
+function mapIdentity<T>(val: T, _index: number): T {
+  return val
+}
+
 export function addAsyncCallFix<TMessageIds extends string, TOptions extends readonly unknown[]>({
   context,
   fixer,
@@ -12,6 +16,7 @@ export function addAsyncCallFix<TMessageIds extends string, TOptions extends rea
   receiver,
   asyncIdentifier,
   args,
+  argsPostProcessor,
 }: {
   context: TSESLint.RuleContext<TMessageIds, TOptions>
   fixer: TSESLint.RuleFixer
@@ -19,6 +24,7 @@ export function addAsyncCallFix<TMessageIds extends string, TOptions extends rea
   receiver: TSESTree.Node
   asyncIdentifier: string
   args: TSESTree.Node[]
+  argsPostProcessor?: (s: string, index: number) => string
 }): TSESLint.RuleFix {
   const doParens =
     receiver.type !== AST_NODE_TYPES.Identifier &&
@@ -26,7 +32,10 @@ export function addAsyncCallFix<TMessageIds extends string, TOptions extends rea
     receiver.type !== AST_NODE_TYPES.CallExpression
   let rcvSrc = context.sourceCode.getText(receiver)
   rcvSrc = doParens ? `(${rcvSrc})` : rcvSrc
-  const paramsSrc = args.map((a) => context.sourceCode.getText(a)).join(', ')
+  const paramsSrc = args
+    .map((a) => context.sourceCode.getText(a))
+    .map(argsPostProcessor ?? mapIdentity)
+    .join(', ')
   return fixer.replaceText(expression, `await ${rcvSrc}.${asyncIdentifier}(${paramsSrc})`)
 }
 
@@ -150,7 +159,8 @@ function composedOfTypeWithName(t: ts.Type, typeName: string): boolean {
  *
  * As a workaround, we use two fallbacks, in order of priority:
  * - aliasSymbol.escapedName
- * - the fallback argument, which is should be the type we searched for in matchAncestorTypes()
+ * - the fallback argument, which should be the type we searched for in
+ *   matchAncestorTypes()
  */
 export function getTypeName(t: ts.Type, fallback: string): string {
   return t.symbol?.name ?? t.aliasSymbol?.escapedName ?? fallback

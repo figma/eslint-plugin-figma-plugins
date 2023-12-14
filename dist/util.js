@@ -7,13 +7,19 @@ exports.isStringNode = exports.getTypeName = exports.traverseTree = exports.Trav
 const utils_1 = require("@typescript-eslint/utils");
 const typescript_1 = __importDefault(require("typescript"));
 exports.createPluginRule = utils_1.ESLintUtils.RuleCreator((name) => `https://github.com/figma/eslint-plugin-figma-plugins/src/rules/${name}.ts`);
-function addAsyncCallFix({ context, fixer, expression, receiver, asyncIdentifier, args, }) {
+function mapIdentity(val, _index) {
+    return val;
+}
+function addAsyncCallFix({ context, fixer, expression, receiver, asyncIdentifier, args, argsPostProcessor, }) {
     const doParens = receiver.type !== utils_1.AST_NODE_TYPES.Identifier &&
         receiver.type !== utils_1.AST_NODE_TYPES.MemberExpression &&
         receiver.type !== utils_1.AST_NODE_TYPES.CallExpression;
     let rcvSrc = context.sourceCode.getText(receiver);
     rcvSrc = doParens ? `(${rcvSrc})` : rcvSrc;
-    const paramsSrc = args.map((a) => context.sourceCode.getText(a)).join(', ');
+    const paramsSrc = args
+        .map((a) => context.sourceCode.getText(a))
+        .map(argsPostProcessor !== null && argsPostProcessor !== void 0 ? argsPostProcessor : mapIdentity)
+        .join(', ');
     return fixer.replaceText(expression, `await ${rcvSrc}.${asyncIdentifier}(${paramsSrc})`);
 }
 exports.addAsyncCallFix = addAsyncCallFix;
@@ -111,7 +117,8 @@ function composedOfTypeWithName(t, typeName) {
  *
  * As a workaround, we use two fallbacks, in order of priority:
  * - aliasSymbol.escapedName
- * - the fallback argument, which is should be the type we searched for in matchAncestorTypes()
+ * - the fallback argument, which should be the type we searched for in
+ *   matchAncestorTypes()
  */
 function getTypeName(t, fallback) {
     var _a, _b, _c, _d;

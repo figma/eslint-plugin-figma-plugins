@@ -1,6 +1,7 @@
 import { awaitRequiresAsync } from './rules/awaitRequiresAsync'
 import { dynamicPageBanDocumentchangeEvent } from './rules/dynamicPageBanDocumentchangeEvent'
 import { dynamicPageBanIdParams } from './rules/dynamicPageBanIdParams'
+import { dynamicPageBanStyleSettersTemp } from './rules/dynamicPageBanStyleSettersTemp'
 import { dynamicPageBanSyncMethods } from './rules/dynamicPageBanSyncMethods'
 import { dynamicPageBanSyncPropGetters } from './rules/dynamicPageBanSyncPropGetters'
 import { dynamicPageBanSyncPropSetters } from './rules/dynamicPageBanSyncPropSetters'
@@ -20,6 +21,7 @@ const dynamicPageErrs: Record<string, unknown> = {
   'await-requires-async': awaitRequiresAsync,
   'dynamic-page-ban-documentchange-event': dynamicPageBanDocumentchangeEvent,
   'dynamic-page-ban-id-params': dynamicPageBanIdParams,
+  'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp,
   'dynamic-page-ban-sync-methods': dynamicPageBanSyncMethods,
   'dynamic-page-ban-sync-prop-getters': dynamicPageBanSyncPropGetters,
   'dynamic-page-ban-sync-prop-setters': dynamicPageBanSyncPropSetters,

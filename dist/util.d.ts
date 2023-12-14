@@ -1,13 +1,14 @@
 import { ESLintUtils, TSESLint, TSESTree } from '@typescript-eslint/utils';
 import ts from 'typescript';
 export declare const createPluginRule: <TOptions extends readonly unknown[], TMessageIds extends string>({ name, meta, ...rule }: Readonly<ESLintUtils.RuleWithMetaAndName<TOptions, TMessageIds>>) => ESLintUtils.RuleModule<TMessageIds, TOptions, ESLintUtils.RuleListener>;
-export declare function addAsyncCallFix<TMessageIds extends string, TOptions extends readonly unknown[]>({ context, fixer, expression, receiver, asyncIdentifier, args, }: {
+export declare function addAsyncCallFix<TMessageIds extends string, TOptions extends readonly unknown[]>({ context, fixer, expression, receiver, asyncIdentifier, args, argsPostProcessor, }: {
     context: TSESLint.RuleContext<TMessageIds, TOptions>;
     fixer: TSESLint.RuleFixer;
     expression: TSESTree.Node;
     receiver: TSESTree.Node;
     asyncIdentifier: string;
     args: TSESTree.Node[];
+    argsPostProcessor?: (s: string, index: number) => string;
 }): TSESLint.RuleFix;
 export interface MatchAncestorTypeResult {
     nodeType: ts.Type;
@@ -36,7 +37,8 @@ export declare function traverseTree(root: TSESTree.Node, visitor: (node: TSESTr
  *
  * As a workaround, we use two fallbacks, in order of priority:
  * - aliasSymbol.escapedName
- * - the fallback argument, which is should be the type we searched for in matchAncestorTypes()
+ * - the fallback argument, which should be the type we searched for in
+ *   matchAncestorTypes()
  */
 export declare function getTypeName(t: ts.Type, fallback: string): string;
 export declare function isStringNode<TMessageIds extends string, TOptions extends readonly unknown[]>(context: TSESLint.RuleContext<TMessageIds, TOptions>, node: TSESTree.Node): boolean;
