@@ -1,10 +1,27 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
 import { createPluginRule, getTypeName, isStringNode, matchAncestorTypes } from '../util'
-import { dynamicPageBannedIdParams } from '../ruleData'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
+
+interface DynamicPageBannedIdParam {
+  receiverType: string
+  method: string
+  paramIndex: number
+  wantParamType: string
+  asyncObjectFetch: string
+}
+
+const dynamicPageBannedIdParams: DynamicPageBannedIdParam[] = [
+  {
+    receiverType: 'VariablesAPI',
+    method: 'createVariable',
+    paramIndex: 1,
+    wantParamType: 'VariableCollection',
+    asyncObjectFetch: 'figma.variables.getVariableCollectionByIdAsync',
+  },
+]
 
 export const dynamicPageBanIdParams = createPluginRule({
   name: 'dynamic-page-ban-id-params',

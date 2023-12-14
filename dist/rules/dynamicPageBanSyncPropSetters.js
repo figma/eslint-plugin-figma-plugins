@@ -3,7 +3,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.dynamicPageBanSyncPropSetters = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
-const ruleData_1 = require("../ruleData");
+const dynamicPageBannedSyncPropSetters = [
+    {
+        property: 'currentPage',
+        replacement: 'setCurrentPageAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        property: 'effectStyleId',
+        replacement: 'setEffectStyleIdAsync',
+        receiverTypes: ['BlendMixin'],
+    },
+    {
+        property: 'fillStyleId',
+        replacement: 'setFillStyleIdAsync',
+        receiverTypes: ['MinimalFillsMixin'],
+    },
+    {
+        property: 'gridStyleId',
+        replacement: 'setGridStyleIdAsync',
+        receiverTypes: ['BaseFrameMixin'],
+    },
+    {
+        property: 'strokeStyleId',
+        replacement: 'setStrokeStyleIdAsync',
+        receiverTypes: ['MinimalStrokesMixin'],
+    },
+    {
+        property: 'textStyleId',
+        replacement: 'setTextStyleIdAsync',
+        receiverTypes: ['TextNode'],
+    },
+    {
+        property: 'backgroundStyleId',
+        replacement: 'setFillStyleIdAsync',
+        receiverTypes: ['DeprecatedBackgroundMixin'],
+    },
+];
 exports.dynamicPageBanSyncPropSetters = (0, util_1.createPluginRule)({
     name: 'dynamic-page-ban-sync-prop-setters',
     meta: {
@@ -28,7 +64,7 @@ exports.dynamicPageBanSyncPropSetters = (0, util_1.createPluginRule)({
                 if (prop.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
                 }
-                const deprecation = ruleData_1.dynamicPageBannedSyncPropSetters.find((s) => s.property === prop.name);
+                const deprecation = dynamicPageBannedSyncPropSetters.find((s) => s.property === prop.name);
                 if (!deprecation) {
                     return;
                 }

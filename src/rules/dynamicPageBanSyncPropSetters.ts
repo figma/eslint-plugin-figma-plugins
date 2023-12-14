@@ -1,10 +1,53 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
 import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } from '../util'
-import { dynamicPageBannedSyncPropSetters } from '../ruleData'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
+
+interface DynamicPageBannedSyncPropSetter {
+  property: string
+  replacement: string
+  receiverTypes: string[]
+}
+
+const dynamicPageBannedSyncPropSetters: DynamicPageBannedSyncPropSetter[] = [
+  {
+    property: 'currentPage',
+    replacement: 'setCurrentPageAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    property: 'effectStyleId',
+    replacement: 'setEffectStyleIdAsync',
+    receiverTypes: ['BlendMixin'],
+  },
+  {
+    property: 'fillStyleId',
+    replacement: 'setFillStyleIdAsync',
+    receiverTypes: ['MinimalFillsMixin'],
+  },
+  {
+    property: 'gridStyleId',
+    replacement: 'setGridStyleIdAsync',
+    receiverTypes: ['BaseFrameMixin'],
+  },
+  {
+    property: 'strokeStyleId',
+    replacement: 'setStrokeStyleIdAsync',
+    receiverTypes: ['MinimalStrokesMixin'],
+  },
+  {
+    property: 'textStyleId',
+    replacement: 'setTextStyleIdAsync',
+    receiverTypes: ['TextNode'],
+  },
+  {
+    property: 'backgroundStyleId',
+    replacement: 'setFillStyleIdAsync',
+    receiverTypes: ['DeprecatedBackgroundMixin'],
+  },
+]
 
 export const dynamicPageBanSyncPropSetters = createPluginRule({
   name: 'dynamic-page-ban-sync-prop-setters',

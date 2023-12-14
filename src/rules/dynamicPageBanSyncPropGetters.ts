@@ -1,10 +1,33 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
 import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } from '../util'
-import { dynamicPageBannedSyncPropGetters } from '../ruleData'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
+
+interface DynamicPageBannedSyncPropGetter {
+  property: string
+  replacement: string
+  receiverTypes: string[]
+}
+
+const dynamicPageBannedSyncPropGetters: DynamicPageBannedSyncPropGetter[] = [
+  {
+    property: 'instances',
+    replacement: 'getInstancesAsync',
+    receiverTypes: ['ComponentNode'],
+  },
+  {
+    property: 'consumers',
+    replacement: 'getConsumersAsync',
+    receiverTypes: ['BaseStyle'],
+  },
+  {
+    property: 'mainComponent',
+    replacement: 'getMainComponentAsync',
+    receiverTypes: ['InstanceNode'],
+  },
+]
 
 export const dynamicPageBanSyncPropGetters = createPluginRule({
   name: 'dynamic-page-ban-sync-prop-getters',

@@ -1,10 +1,83 @@
 import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/typescript-estree'
 import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } from '../util'
-import { dynamicPageBannedSyncMethods } from '../ruleData'
 
 // Calls to createPluginRule() cause typechecker errors without this import.
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
+
+interface DynamicPageBannedSyncMethod {
+  method: string
+  replacement: string
+  receiverTypes: string[]
+}
+
+const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
+  {
+    method: 'getNodeById',
+    replacement: 'getNodeByIdAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getStyleById',
+    replacement: 'getStyleByIdAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getFileThumbnailNode',
+    replacement: 'getFileThumbnailNodeAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getLocalTextStyles',
+    replacement: 'getLocalTextStylesAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getLocalPaintStyles',
+    replacement: 'getLocalPaintStylesAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getLocalEffectStyles',
+    replacement: 'getLocalEffectStylesAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getLocalGridStyles',
+    replacement: 'getLocalGridStylesAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getVariableById',
+    replacement: 'getVariableByIdAsync',
+    receiverTypes: ['VariablesAPI'],
+  },
+  {
+    method: 'getVariableCollectionById',
+    replacement: 'getVariableCollectionByIdAsync',
+    receiverTypes: ['VariablesAPI'],
+  },
+  {
+    method: 'getLocalVariableCollections',
+    replacement: 'getLocalVariableCollectionsAsync',
+    receiverTypes: ['VariablesAPI'],
+  },
+  {
+    method: 'getLocalVariables',
+    replacement: 'getLocalVariablesAsync',
+    receiverTypes: ['VariablesAPI'],
+  },
+  {
+    method: 'setRangeTextStyle',
+    replacement: 'setRangeTextStyleIdAsync',
+    receiverTypes: ['NonResizableTextMixin'],
+  },
+  {
+    method: 'setRangeFillStyle',
+    replacement: 'setRangeFillStyleIdAsync',
+    receiverTypes: ['NonResizableTextMixin'],
+  },
+]
 
 export const dynamicPageBanSyncMethods = createPluginRule({
   name: 'dynamic-page-ban-sync-methods',

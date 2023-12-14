@@ -3,7 +3,73 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.dynamicPageBanSyncMethods = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
-const ruleData_1 = require("../ruleData");
+const dynamicPageBannedSyncMethods = [
+    {
+        method: 'getNodeById',
+        replacement: 'getNodeByIdAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getStyleById',
+        replacement: 'getStyleByIdAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getFileThumbnailNode',
+        replacement: 'getFileThumbnailNodeAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getLocalTextStyles',
+        replacement: 'getLocalTextStylesAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getLocalPaintStyles',
+        replacement: 'getLocalPaintStylesAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getLocalEffectStyles',
+        replacement: 'getLocalEffectStylesAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getLocalGridStyles',
+        replacement: 'getLocalGridStylesAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getVariableById',
+        replacement: 'getVariableByIdAsync',
+        receiverTypes: ['VariablesAPI'],
+    },
+    {
+        method: 'getVariableCollectionById',
+        replacement: 'getVariableCollectionByIdAsync',
+        receiverTypes: ['VariablesAPI'],
+    },
+    {
+        method: 'getLocalVariableCollections',
+        replacement: 'getLocalVariableCollectionsAsync',
+        receiverTypes: ['VariablesAPI'],
+    },
+    {
+        method: 'getLocalVariables',
+        replacement: 'getLocalVariablesAsync',
+        receiverTypes: ['VariablesAPI'],
+    },
+    {
+        method: 'setRangeTextStyle',
+        replacement: 'setRangeTextStyleIdAsync',
+        receiverTypes: ['NonResizableTextMixin'],
+    },
+    {
+        method: 'setRangeFillStyle',
+        replacement: 'setRangeFillStyleIdAsync',
+        receiverTypes: ['NonResizableTextMixin'],
+    },
+];
 exports.dynamicPageBanSyncMethods = (0, util_1.createPluginRule)({
     name: 'dynamic-page-ban-sync-methods',
     meta: {
@@ -29,7 +95,7 @@ exports.dynamicPageBanSyncMethods = (0, util_1.createPluginRule)({
                 if (calleeProp.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
                 }
-                const deprecation = ruleData_1.dynamicPageBannedSyncMethods.find((m) => m.method === calleeProp.name);
+                const deprecation = dynamicPageBannedSyncMethods.find((m) => m.method === calleeProp.name);
                 if (!deprecation) {
                     return;
                 }
