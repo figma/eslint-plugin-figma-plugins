@@ -30,7 +30,7 @@ export const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
   },
   {
     method: 'getStyleById',
-    replacement: 'getStyleById',
+    replacement: 'getStyleByIdAsync',
     receiverTypes: ['PluginAPI'],
   },
   {

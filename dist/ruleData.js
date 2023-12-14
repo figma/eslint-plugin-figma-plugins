@@ -18,7 +18,7 @@ exports.dynamicPageBannedSyncMethods = [
     },
     {
         method: 'getStyleById',
-        replacement: 'getStyleById',
+        replacement: 'getStyleByIdAsync',
         receiverTypes: ['PluginAPI'],
     },
     {
