@@ -4,15 +4,25 @@ This repository defines [typescript-eslint](https://typescript-eslint.io/) rules
 
 ### Why the weird, repetitive name?
 
-It turns out that eslint has an enforced convention for plugin package names. You have to prefix the leaf package with `eslint-plugin-`. The shortest name we could use is probably `@figma/eslint-plugin-plugins`, but that's pretty confusing and looks like a typo. So the current name is the least-bad option.
+ESLint package names must start with `eslint-plugin-`. Under this convention, the shortest name we could use is probably `@figma/eslint-plugin-plugins`, but that's pretty confusing! So the current name is a compromise between clarity and brevity.
 
-# Usage
+## Usage
 
-## Install the package
+### Installation
 
-This package has not yet been published to NPM. You can get this in two ways:
+#### Dependencies
 
-### Directly via git
+This linter requires TypeScript, ESLint, typescript-eslint, and the Figma Plugin API type definitions. To install all of these, run:
+
+```
+npm install -D typescript eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin @figma/plugin-typings
+```
+
+#### Install the ESLint plugin package
+
+This package has not yet been published to NPM. You can get it in two ways:
+
+##### Directly via git
 
 Add the following to your Figma plugin's `package.json`:
 
@@ -26,7 +36,7 @@ Add the following to your Figma plugin's `package.json`:
 }
 ```
 
-### From local disk
+##### From local disk
 
 Clone this repo. Then add the following to your Figma plugin's `package.json`:
 
@@ -40,15 +50,34 @@ Clone this repo. Then add the following to your Figma plugin's `package.json`:
 }
 ```
 
-### Update node_modules
+#### Update node_modules
 
 Once you've updated your `package.json`, run `npm install` to pull down the latest changes.
 
-## Configure eslint
+#### Configure eslint
 
-If you haven't already, install eslint. I recommend installing it alongside typescript-eslint using [these instructions](https://typescript-eslint.io/getting-started#step-1-installation).
+If you haven't already, install ESLint. We recommend installing it alongside typescript-eslint using [these instructions](https://typescript-eslint.io/getting-started#step-1-installation).
 
-Next, ensure that the `extends` array in your eslint config contains `plugin:@figma/figma-plugins/recommended`. Here's an example `.eslintrc.js`:
+Update your ESLint config's `extends` array to include the `plugin:@figma/figma-plugins/dynamic-page-recommended` ruleset. We also recommend the following rulesets:
+
+- `eslint:recommended`,
+- `plugin:@typescript-eslint/recommended-type-checked`
+- `plugin:@typescript-eslint/stylistic-type-checked`
+
+To work with TypeScript code, ESLint also requires the following parser settings:
+
+```
+{
+  ...
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+  ...
+}
+```
+
+Here's a full example of `.eslintrc.js`:
 
 ```
 /* eslint-env node */
@@ -63,42 +92,39 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-  root: true,
-  rules: {
-    // allow underscore-prefixing of unused variables
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      },
-    ],
-  },
+  root: true
 }
 ```
 
-The rules from this package should now be active any time you run eslint, including via the [eslint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+#### Restart the ESLint server
 
-## Restart eslint server
+If you've run `npm install` and updated to a newer version of this package, remember to restart your IDE. In VSCode, you can restart the ESLint server independently by opening the command palette and choosing "Restart ESLint Server".
 
-If you've run `npm install` and updated to a newer version of this package, remember to restart your IDE or the IDE's eslint server.
+### Linting and autofixing
 
-## Autofixing
+You can lint your project using these rules by running
 
-Some rules provide autofixes. You can run these from the command line:
+```
+eslint ./path/to/source
+```
+
+Some rules provide autofixes, which you can run using `--fix`.
 
 ```
 eslint --fix ./path/to/source
 ```
 
-Alternately, you can use your IDE's eslint extension to trigger the fixes on a per-line or whole-file basis.
+Autofixes are also available via some IDEs.
 
-# Developing
+### VSCode
 
-## Building the package
+To use ESLint with VSCode, see the [ESLint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). This extension will show rule violations inline, as well as provide opportunities to run autofixes directly in the IDE.
 
-To compile the rules into a consumable eslint plugin, run:
+## Developing
+
+### Building the package
+
+To compile the rules into a consumable ESLint plugin, run:
 
 ```
 npm run watch
@@ -106,7 +132,7 @@ npm run watch
 
 Any consuming repo will need to re-install the package using the process described [above](#install-the-package).
 
-## Tests
+### Tests
 
 Tests are implemented in the [test/](./test) directory using [@typescript-eslint/RuleTester](https://typescript-eslint.io/packages/rule-tester/). The test harness is [ts-jest]().
 
@@ -130,6 +156,10 @@ npm run test-workaround
 
 This enables the `--detect-open-handles` Jest option. Tests will run slower, but you'll see the real cause of the errors.
 
-# TODO
+### Contributing
 
-- automated eslint rule doc generation
+Please see [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+## Rule documentation
+
+Documentation for individual rules is still WIP.
