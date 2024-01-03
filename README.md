@@ -60,7 +60,7 @@ Once you've updated your `package.json`, run `npm install` to pull down the late
 
 If you haven't already, install ESLint. We recommend installing it alongside typescript-eslint using [these instructions](https://typescript-eslint.io/getting-started#step-1-installation).
 
-Update your ESLint config's `extends` array to include the `plugin:@figma/figma-plugins/dynamic-page-recommended` ruleset. We also recommend the following rulesets:
+Update your ESLint config's `extends` array to include the `plugin:@figma/figma-plugins/dynamic-page` ruleset. We also recommend the following rulesets:
 
 - `eslint:recommended`,
 - `plugin:@typescript-eslint/recommended-type-checked`
@@ -88,7 +88,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
-    'plugin:@figma/figma-plugins/dynamic-page-recommended',
+    'plugin:@figma/figma-plugins/dynamic-page',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
