@@ -38,13 +38,13 @@ Add the following to your Figma plugin's `package.json`:
 
 ##### From local disk
 
-Clone this repo. Then add the following to your Figma plugin's `package.json`:
+Clone this repo. Then add the following to your Figma plugin's `package.json`, replacing `/path/to/local/clone` with an actual filesystem path:
 
 ```
 {
   ...
   "devDependencies": {
-    "@figma/eslint-plugin-figma-plugins": "file:/Users/!!YOUR_USERNAME_HERE!!/figma/eslint-plugin-figma-plugins",
+    "@figma/eslint-plugin-figma-plugins": "file:/path/to/local/clone",
     ...
   }
 }
