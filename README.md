@@ -107,13 +107,13 @@ If you've run `npm install` and updated to a newer version of this package, reme
 You can lint your project using these rules by running
 
 ```
-eslint ./path/to/source
+npx eslint ./path/to/source
 ```
 
 Some rules provide autofixes, which you can run using `--fix`.
 
 ```
-eslint --fix ./path/to/source
+npx eslint --fix ./path/to/source
 ```
 
 Autofixes are also available via some IDEs.
