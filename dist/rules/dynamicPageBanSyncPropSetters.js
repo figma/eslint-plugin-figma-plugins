@@ -44,7 +44,7 @@ exports.dynamicPageBanSyncPropSetters = (0, util_1.createPluginRule)({
     name: 'dynamic-page-ban-sync-prop-setters',
     meta: {
         docs: {
-            description: 'Ban synchronous property getters that are not compatible with the dynamic-page manifest option.',
+            description: 'Ban synchronous property getters that are not compatible with `dynamic-page`',
         },
         fixable: 'code',
         messages: {

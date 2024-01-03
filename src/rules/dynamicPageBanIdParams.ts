@@ -27,8 +27,7 @@ export const dynamicPageBanIdParams = createPluginRule({
   name: 'dynamic-page-ban-id-params',
   meta: {
     docs: {
-      description:
-        'Ban string ID parameters that are not compatible with the dynamic-page manifest option.',
+      description: 'Ban string ID parameters that are not compatible with `dynamic-page`',
     },
     fixable: 'code',
     messages: {

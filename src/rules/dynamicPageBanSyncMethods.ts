@@ -83,8 +83,7 @@ export const dynamicPageBanSyncMethods = createPluginRule({
   name: 'dynamic-page-ban-sync-methods',
   meta: {
     docs: {
-      description:
-        'Ban synchronous methods that are not compatible with the dynamic-page manifest option.',
+      description: 'Ban synchronous methods that are not compatible with `dynamic-page`',
     },
     fixable: 'code',
     messages: {

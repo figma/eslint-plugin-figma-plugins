@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.isStringNode = exports.getTypeName = exports.traverseTree = exports.TraverseTreeResult = exports.matchAncestorTypes = exports.addAsyncCallFix = exports.createPluginRule = void 0;
 const utils_1 = require("@typescript-eslint/utils");
 const typescript_1 = __importDefault(require("typescript"));
-exports.createPluginRule = utils_1.ESLintUtils.RuleCreator((name) => `https://github.com/figma/eslint-plugin-figma-plugins/src/rules/${name}.ts`);
+exports.createPluginRule = utils_1.ESLintUtils.RuleCreator((name) => `https://github.com/figma/eslint-plugin-figma-plugins/docs/rules/${name}.md`);
 function mapIdentity(val, _index) {
     return val;
 }

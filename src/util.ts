@@ -2,7 +2,7 @@ import { AST_NODE_TYPES, ESLintUtils, TSESLint, TSESTree } from '@typescript-esl
 import ts from 'typescript'
 
 export const createPluginRule = ESLintUtils.RuleCreator(
-  (name) => `https://github.com/figma/eslint-plugin-figma-plugins/src/rules/${name}.ts`,
+  (name) => `https://github.com/figma/eslint-plugin-figma-plugins/docs/rules/${name}.md`,
 )
 
 function mapIdentity<T>(val: T, _index: number): T {

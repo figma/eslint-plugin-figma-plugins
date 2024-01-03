@@ -9,8 +9,7 @@ export const dynamicPageBanDocumentchangeEvent = createPluginRule({
   name: 'dynamic-page-ban-documentchange-event',
   meta: {
     docs: {
-      description:
-        'Ban the documentchange event, which is not compatible with the dynamic-page manifest option.',
+      description: 'Ban `documentchange` event',
     },
     messages: {
       onReplacement: `The 'documentchange' event is deprecated. Please use PageNode.on('nodechange') or figma.on('stylechange') instead.`,

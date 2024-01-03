@@ -45,7 +45,7 @@ exports.dynamicPageBanStyleSettersTemp = (0, util_1.createPluginRule)({
     name: 'dynamic-page-ban-style-setters-temp',
     meta: {
         docs: {
-            description: 'Ban "setStyle()" async methods that were introduced in the early part of the dynamic-page Plugin API beta.',
+            description: 'Ban `async` style-assignment methods from the `dynamic-page` beta',
         },
         fixable: 'code',
         messages: {

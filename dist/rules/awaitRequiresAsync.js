@@ -22,7 +22,7 @@ exports.awaitRequiresAsync = (0, util_1.createPluginRule)({
     name: 'await-requires-async',
     meta: {
         docs: {
-            description: 'Functions that contain await must be async',
+            description: 'Require functions that contain `await` to be `async`',
         },
         fixable: 'code',
         messages: {
