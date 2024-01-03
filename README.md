@@ -2,6 +2,8 @@
 
 This repository defines [typescript-eslint](https://typescript-eslint.io/) rules for [Figma plugin development](https://www.figma.com/plugin-docs/).
 
+This linter is still in beta, and may include lint warnings about features that aren't generally available. Please avoid using it unless you've been advised to do so. We appreciate your patience!
+
 ### Why the weird, repetitive name?
 
 ESLint package names must start with `eslint-plugin-`. Under this convention, the shortest name we could use is probably `@figma/eslint-plugin-plugins`, but that's pretty confusing! So the current name is a compromise between clarity and brevity.
