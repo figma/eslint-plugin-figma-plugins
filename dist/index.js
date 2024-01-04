@@ -4,7 +4,6 @@ exports.configs = exports.rules = void 0;
 const awaitRequiresAsync_1 = require("./rules/awaitRequiresAsync");
 const dynamicPageBanDocumentchangeEvent_1 = require("./rules/dynamicPageBanDocumentchangeEvent");
 const dynamicPageBanIdParams_1 = require("./rules/dynamicPageBanIdParams");
-const dynamicPageBanStyleSettersTemp_1 = require("./rules/dynamicPageBanStyleSettersTemp");
 const dynamicPageBanSyncMethods_1 = require("./rules/dynamicPageBanSyncMethods");
 const dynamicPageBanSyncPropGetters_1 = require("./rules/dynamicPageBanSyncPropGetters");
 const dynamicPageBanSyncPropSetters_1 = require("./rules/dynamicPageBanSyncPropSetters");
@@ -19,7 +18,8 @@ const dynamicPageErrs = {
     'await-requires-async': awaitRequiresAsync_1.awaitRequiresAsync,
     'dynamic-page-ban-documentchange-event': dynamicPageBanDocumentchangeEvent_1.dynamicPageBanDocumentchangeEvent,
     'dynamic-page-ban-id-params': dynamicPageBanIdParams_1.dynamicPageBanIdParams,
-    'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp_1.dynamicPageBanStyleSettersTemp,
+    // TODO: release this rule to beta audience once we've officially announced the deprecation
+    // 'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp,
     'dynamic-page-ban-sync-methods': dynamicPageBanSyncMethods_1.dynamicPageBanSyncMethods,
     'dynamic-page-ban-sync-prop-getters': dynamicPageBanSyncPropGetters_1.dynamicPageBanSyncPropGetters,
     'dynamic-page-ban-sync-prop-setters': dynamicPageBanSyncPropSetters_1.dynamicPageBanSyncPropSetters,

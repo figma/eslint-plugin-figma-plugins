@@ -21,7 +21,8 @@ const dynamicPageErrs: Record<string, unknown> = {
   'await-requires-async': awaitRequiresAsync,
   'dynamic-page-ban-documentchange-event': dynamicPageBanDocumentchangeEvent,
   'dynamic-page-ban-id-params': dynamicPageBanIdParams,
-  'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp,
+  // TODO: release this rule to beta audience once we've officially announced the deprecation
+  // 'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp,
   'dynamic-page-ban-sync-methods': dynamicPageBanSyncMethods,
   'dynamic-page-ban-sync-prop-getters': dynamicPageBanSyncPropGetters,
   'dynamic-page-ban-sync-prop-setters': dynamicPageBanSyncPropSetters,

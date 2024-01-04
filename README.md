@@ -136,7 +136,6 @@ To use ESLint with VSCode, see the [ESLint VSCode extension](https://marketplace
 | [await-requires-async](docs/rules/await-requires-async.md)                                   | Require functions that contain `await` to be `async`                         | ⚡  |    | 🔧 |
 | [dynamic-page-ban-documentchange-event](docs/rules/dynamic-page-ban-documentchange-event.md) | Ban `documentchange` event                                                   | ⚡  |    |    |
 | [dynamic-page-ban-id-params](docs/rules/dynamic-page-ban-id-params.md)                       | Ban string ID parameters that are not compatible with `dynamic-page`         | ⚡  |    | 🔧 |
-| [dynamic-page-ban-style-setters-temp](docs/rules/dynamic-page-ban-style-setters-temp.md)     | Ban `async` style-assignment methods from the `dynamic-page` beta            | ⚡  |    | 🔧 |
 | [dynamic-page-ban-sync-methods](docs/rules/dynamic-page-ban-sync-methods.md)                 | Ban synchronous methods that are not compatible with `dynamic-page`          | ⚡  |    | 🔧 |
 | [dynamic-page-ban-sync-prop-getters](docs/rules/dynamic-page-ban-sync-prop-getters.md)       | Ban synchronous property getters that are not compatible with `dynamic-page` | ⚡  |    | 🔧 |
 | [dynamic-page-ban-sync-prop-setters](docs/rules/dynamic-page-ban-sync-prop-setters.md)       | Ban synchronous property getters that are not compatible with `dynamic-page` | ⚡  |    | 🔧 |
