@@ -12,3 +12,45 @@ relevant object instead.
 
 This rule provides a fix that fetches the relevant object by ID using an async
 fetch function.
+
+Note that the fix may produce an expression that doesn't fully satisfy the
+type-checker. For example, the fix will transform this:
+
+```
+node.clearExplicitVariableModeForCollection("foo");
+```
+
+into this:
+
+```
+node.clearExplicitVariableModeForCollection(
+  await figma.variables.getVariableCollectionByIdAsync("foo")
+);
+```
+
+The type of the argument for `clearExplicitVariableModeForCollection` is
+`VariableCollection`, whereas the type of the `await` expression is
+`VariableCollection | null`. In other words, `getVariableCollectionByIdAsync`
+can return null.
+
+You can handle this situation in one of two ways. Ideally, you should check to
+see if the variable collection is null, and handle that case explicitly, such
+as:
+
+```
+const collection = await figma.variables.getVariableCollectionByIdAsync("foo")
+if (collection === null) {
+  // log an error, show a message to the user, etc.
+  return;
+}
+
+node.clearExplicitVariableModeForCollection(collection)
+```
+
+A quick-and-dirty workaround is to silence the typechecker using the `!` operator:
+
+```
+node.clearExplicitVariableModeForCollection(
+  (await figma.variables.getVariableCollectionByIdAsync("foo"))!
+);
+```

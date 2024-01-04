@@ -47,6 +47,11 @@ const dynamicPageBannedSyncPropSetters: DynamicPageBannedSyncPropSetter[] = [
     replacement: 'setFillStyleIdAsync',
     receiverTypes: ['DeprecatedBackgroundMixin'],
   },
+  {
+    property: 'vectorNetwork',
+    replacement: 'setVectorNetworkAsync',
+    receiverTypes: ['VectorLikeMixin'],
+  },
 ]
 
 export const dynamicPageBanSyncPropSetters = createPluginRule({
