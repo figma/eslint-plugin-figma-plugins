@@ -5,19 +5,17 @@ import { createPluginRule, matchAncestorTypes } from '../util'
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-export const dynamicPageBanDocumentchangeEvent = createPluginRule({
-  name: 'dynamic-page-ban-documentchange-event',
+export const dynamicPageDocumentchangeEventAdvice = createPluginRule({
+  name: 'dynamic-page-documentchange-event-advice',
   meta: {
     docs: {
-      description: 'Ban `documentchange` event',
+      description: 'Advice on using the `documentchange` event',
     },
     messages: {
-      onReplacement: `The 'documentchange' event is deprecated. Please use PageNode.on('nodechange') or figma.on('stylechange') instead.`,
-      onceReplacement: `The 'documentchange' event is deprecated. Please use PageNode.once('nodechange') or figma.once('stylechange') instead.`,
-      offReplacement: `The 'documentchange' event is deprecated. Please use the 'nodechange' event on any PageNode, or the 'stylechange' event on the figma object.`,
+      advice: `When using the dynamic-page manifest field, remember to call figma.loadAllPagesAsync() before using DocumentNode.{{method}}(). loadAllPagesAsync() only needs to be called once.`,
     },
     schema: [],
-    type: 'problem',
+    type: 'suggestion',
   },
   defaultOptions: [],
   create(context) {
@@ -58,14 +56,7 @@ export const dynamicPageBanDocumentchangeEvent = createPluginRule({
           return
         }
 
-        let messageId: 'onReplacement' | 'onceReplacement' | 'offReplacement' = 'onReplacement'
-        if (calleeProp.name === 'once') {
-          messageId = 'onceReplacement'
-        } else if (calleeProp.name === 'off') {
-          messageId = 'offReplacement'
-        }
-
-        context.report({ node, messageId })
+        context.report({ node, messageId: 'advice' })
       },
     }
   },

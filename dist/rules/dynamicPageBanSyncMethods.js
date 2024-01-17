@@ -5,16 +5,6 @@ const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
 const dynamicPageBannedSyncMethods = [
     {
-        method: 'getNodeById',
-        replacement: 'getNodeByIdAsync',
-        receiverTypes: ['PluginAPI'],
-    },
-    {
-        method: 'getStyleById',
-        replacement: 'getStyleByIdAsync',
-        receiverTypes: ['PluginAPI'],
-    },
-    {
         method: 'getFileThumbnailNode',
         replacement: 'getFileThumbnailNodeAsync',
         receiverTypes: ['PluginAPI'],
@@ -40,16 +30,6 @@ const dynamicPageBannedSyncMethods = [
         receiverTypes: ['PluginAPI'],
     },
     {
-        method: 'getVariableById',
-        replacement: 'getVariableByIdAsync',
-        receiverTypes: ['VariablesAPI'],
-    },
-    {
-        method: 'getVariableCollectionById',
-        replacement: 'getVariableCollectionByIdAsync',
-        receiverTypes: ['VariablesAPI'],
-    },
-    {
         method: 'getLocalVariableCollections',
         replacement: 'getLocalVariableCollectionsAsync',
         receiverTypes: ['VariablesAPI'],
@@ -60,13 +40,33 @@ const dynamicPageBannedSyncMethods = [
         receiverTypes: ['VariablesAPI'],
     },
     {
-        method: 'setRangeTextStyle',
-        replacement: 'setRangeTextStyleIdAsync',
-        receiverTypes: ['NonResizableTextMixin'],
+        method: 'getNodeById',
+        replacement: 'getNodeByIdAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getStyleById',
+        replacement: 'getStyleByIdAsync',
+        receiverTypes: ['PluginAPI'],
+    },
+    {
+        method: 'getVariableById',
+        replacement: 'getVariableByIdAsync',
+        receiverTypes: ['VariablesAPI'],
+    },
+    {
+        method: 'getVariableCollectionById',
+        replacement: 'getVariableCollectionByIdAsync',
+        receiverTypes: ['VariablesAPI'],
     },
     {
         method: 'setRangeFillStyle',
         replacement: 'setRangeFillStyleIdAsync',
+        receiverTypes: ['NonResizableTextMixin'],
+    },
+    {
+        method: 'setRangeTextStyle',
+        replacement: 'setRangeTextStyleIdAsync',
         receiverTypes: ['NonResizableTextMixin'],
     },
 ];

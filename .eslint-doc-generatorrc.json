@@ -1,3 +1,6 @@
 {
-  "configEmoji": [["dynamic-page", "⚡"]]
+  "configEmoji": [
+    ["dynamic-page", "⚡"],
+    ["dynamic-page-problems-only", "💥"]
+  ]
 }

@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dynamicPageFindMethodReminder = void 0;
+exports.dynamicPageFindMethodAdvice = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
 const findMethods = ['findAll', 'findAllWithCriteria', 'findChild', 'findChildren', 'findOne'];
-exports.dynamicPageFindMethodReminder = (0, util_1.createPluginRule)({
-    name: 'dynamic-page-find-method-reminder',
+exports.dynamicPageFindMethodAdvice = (0, util_1.createPluginRule)({
+    name: 'dynamic-page-find-method-advice',
     meta: {
         docs: {
-            description: 'Reminder to call loadPagesAsync() before calling find*() methods',
+            description: 'Advice on using the find*() family of methods',
         },
         messages: {
-            reminder: 'When using the dynamic-page manifest field, remember to call figma.loadPagesAsync() before using DocumentNode.{{method}}(). loadPagesAsync() only needs to be called once.',
+            advice: 'When using the dynamic-page manifest field, remember to call figma.loadAllPagesAsync() before using DocumentNode.{{method}}(). loadAllPagesAsync() only needs to be called once.',
         },
         schema: [],
         type: 'suggestion',
@@ -38,7 +38,7 @@ exports.dynamicPageFindMethodReminder = (0, util_1.createPluginRule)({
                 }
                 context.report({
                     node,
-                    messageId: 'reminder',
+                    messageId: 'advice',
                     data: { method: calleeProp.name },
                 });
             },

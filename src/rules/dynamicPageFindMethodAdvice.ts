@@ -7,14 +7,14 @@ import type { TSESLint as _ } from '@typescript-eslint/utils'
 
 const findMethods = ['findAll', 'findAllWithCriteria', 'findChild', 'findChildren', 'findOne']
 
-export const dynamicPageFindMethodReminder = createPluginRule({
-  name: 'dynamic-page-find-method-reminder',
+export const dynamicPageFindMethodAdvice = createPluginRule({
+  name: 'dynamic-page-find-method-advice',
   meta: {
     docs: {
-      description: 'Reminder to call loadAllPagesAsync() before calling find*() methods',
+      description: 'Advice on using the find*() family of methods',
     },
     messages: {
-      reminder:
+      advice:
         'When using the dynamic-page manifest field, remember to call figma.loadAllPagesAsync() before using DocumentNode.{{method}}(). loadAllPagesAsync() only needs to be called once.',
     },
     schema: [],
@@ -46,7 +46,7 @@ export const dynamicPageFindMethodReminder = createPluginRule({
 
         context.report({
           node,
-          messageId: 'reminder',
+          messageId: 'advice',
           data: { method: calleeProp.name },
         })
       },
