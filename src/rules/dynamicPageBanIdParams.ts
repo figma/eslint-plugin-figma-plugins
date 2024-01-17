@@ -35,6 +35,13 @@ const dynamicPageBannedIdParams: DynamicPageBannedIdParam[] = [
     wantParamType: 'VariableCollection',
     asyncObjectFetch: 'figma.variables.getVariableCollectionByIdAsync',
   },
+  {
+    receiverType: 'SceneNodeMixin',
+    method: 'setBoundVariable',
+    paramIndex: 1,
+    wantParamType: 'Variable',
+    asyncObjectFetch: 'figma.variables.getVariableByIdAsync',
+  },
 ]
 
 export const dynamicPageBanIdParams = createPluginRule({
