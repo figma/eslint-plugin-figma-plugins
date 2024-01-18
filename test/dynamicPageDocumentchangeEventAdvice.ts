@@ -1,4 +1,4 @@
-import { dynamicPageBanDocumentchangeEvent } from '../src/rules/dynamicPageBanDocumentchangeEvent'
+import { dynamicPageDocumentchangeEventAdvice } from '../src/rules/dynamicPageDocumentchangeEventAdvice'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -9,7 +9,7 @@ interface PluginAPI {
 }
 `
 
-ruleTester().run('dynamic-page-ban-documentchange-event', dynamicPageBanDocumentchangeEvent, {
+ruleTester().run('dynamic-page-ban-documentchange-event', dynamicPageDocumentchangeEventAdvice, {
   valid: [
     {
       code: `
@@ -51,7 +51,7 @@ function func(figma: PluginAPI)  {
   figma.on('documentchange')
 }
 `,
-      errors: [{ messageId: 'onReplacement' }],
+      errors: [{ messageId: 'advice' }],
     },
     {
       code: `
@@ -60,7 +60,7 @@ function func(figma: PluginAPI)  {
   figma.once('documentchange')
 }
 `,
-      errors: [{ messageId: 'onceReplacement' }],
+      errors: [{ messageId: 'advice' }],
     },
     {
       code: `
@@ -69,7 +69,7 @@ function func(figma: PluginAPI)  {
   figma.off('documentchange')
 }
 `,
-      errors: [{ messageId: 'offReplacement' }],
+      errors: [{ messageId: 'advice' }],
     },
   ],
 })

@@ -1,4 +1,4 @@
-# Reminder to call loadPagesAsync() before calling find*() methods (`@figma/figma-plugins/dynamic-page-find-method-reminder`)
+# Advice on using the find*() family of methods (`@figma/figma-plugins/dynamic-page-find-method-advice`)
 
 ⚠️ This rule _warns_ in the ⚡ `dynamic-page` config.
 

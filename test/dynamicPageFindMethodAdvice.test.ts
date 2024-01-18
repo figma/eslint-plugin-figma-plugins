@@ -1,4 +1,4 @@
-import { dynamicPageFindMethodReminder } from '../src/rules/dynamicPageFindMethodReminder'
+import { dynamicPageFindMethodAdvice } from '../src/rules/dynamicPageFindMethodAdvice'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -13,7 +13,7 @@ interface DocumentNode {
 }
 `
 
-ruleTester().run('dynamic-page-ban-sync-methods', dynamicPageFindMethodReminder, {
+ruleTester().run('dynamic-page-ban-sync-methods', dynamicPageFindMethodAdvice, {
   valid: [
     {
       code: `
@@ -40,7 +40,7 @@ function func(doc: DocumentNode) {
   doc.findAll()
 }
 `,
-      errors: [{ messageId: 'reminder' }],
+      errors: [{ messageId: 'advice' }],
     },
     {
       code: `
@@ -49,7 +49,7 @@ function func(doc: DocumentNode) {
   doc.findOne()
 }
 `,
-      errors: [{ messageId: 'reminder' }],
+      errors: [{ messageId: 'advice' }],
     },
   ],
 })

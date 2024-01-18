@@ -1,11 +1,11 @@
 import { awaitRequiresAsync } from './rules/awaitRequiresAsync'
-import { dynamicPageBanDocumentchangeEvent } from './rules/dynamicPageBanDocumentchangeEvent'
+import { dynamicPageDocumentchangeEventAdvice } from './rules/dynamicPageDocumentchangeEventAdvice'
 import { dynamicPageBanIdParams } from './rules/dynamicPageBanIdParams'
 import { dynamicPageBanStyleSettersTemp } from './rules/dynamicPageBanStyleSettersTemp'
 import { dynamicPageBanSyncMethods } from './rules/dynamicPageBanSyncMethods'
 import { dynamicPageBanSyncPropGetters } from './rules/dynamicPageBanSyncPropGetters'
 import { dynamicPageBanSyncPropSetters } from './rules/dynamicPageBanSyncPropSetters'
-import { dynamicPageFindMethodReminder } from './rules/dynamicPageFindMethodReminder'
+import { dynamicPageFindMethodAdvice } from './rules/dynamicPageFindMethodAdvice'
 
 function rulesetWithSeverity(
   severity: 'error' | 'warn',
@@ -19,17 +19,16 @@ function rulesetWithSeverity(
 
 const dynamicPageErrs: Record<string, unknown> = {
   'await-requires-async': awaitRequiresAsync,
-  'dynamic-page-ban-documentchange-event': dynamicPageBanDocumentchangeEvent,
   'dynamic-page-ban-id-params': dynamicPageBanIdParams,
-  // TODO: release this rule to beta audience once we've officially announced the deprecation
-  // 'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp,
+  'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp,
   'dynamic-page-ban-sync-methods': dynamicPageBanSyncMethods,
   'dynamic-page-ban-sync-prop-getters': dynamicPageBanSyncPropGetters,
   'dynamic-page-ban-sync-prop-setters': dynamicPageBanSyncPropSetters,
 }
 
-const dynamicePageWarnings: Record<string, unknown> = {
-  'dynamic-page-find-method-reminder': dynamicPageFindMethodReminder,
+const dynamicePageAdvice: Record<string, unknown> = {
+  'dynamic-page-documentchange-event-advice': dynamicPageDocumentchangeEventAdvice,
+  'dynamic-page-find-method-advice': dynamicPageFindMethodAdvice,
 }
 
 // The exported type annotations in this file are somewhat arbitrary; we do NOT
@@ -39,7 +38,7 @@ const dynamicePageWarnings: Record<string, unknown> = {
 
 export const rules: unknown = {
   ...dynamicPageErrs,
-  ...dynamicePageWarnings,
+  ...dynamicePageAdvice,
 }
 
 export const configs: unknown = {
@@ -47,7 +46,13 @@ export const configs: unknown = {
     plugins: ['@figma/figma-plugins'],
     rules: {
       ...rulesetWithSeverity('error', dynamicPageErrs),
-      ...rulesetWithSeverity('warn', dynamicePageWarnings),
+      ...rulesetWithSeverity('warn', dynamicePageAdvice),
+    },
+  },
+  'dynamic-page-problems-only': {
+    plugins: ['@figma/figma-plugins'],
+    rules: {
+      ...rulesetWithSeverity('error', dynamicPageErrs),
     },
   },
 }

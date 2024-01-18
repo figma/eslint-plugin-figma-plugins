@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dynamicPageBanDocumentchangeEvent = void 0;
+exports.dynamicPageDocumentchangeEventAdvice = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
-exports.dynamicPageBanDocumentchangeEvent = (0, util_1.createPluginRule)({
-    name: 'dynamic-page-ban-documentchange-event',
+exports.dynamicPageDocumentchangeEventAdvice = (0, util_1.createPluginRule)({
+    name: 'dynamic-page-documentchange-event-advice',
     meta: {
         docs: {
-            description: 'Ban `documentchange` event',
+            description: 'Advice on using the `documentchange` event',
         },
         messages: {
-            onReplacement: `The 'documentchange' event is deprecated. Please use PageNode.on('nodechange') or figma.on('stylechange') instead.`,
-            onceReplacement: `The 'documentchange' event is deprecated. Please use PageNode.once('nodechange') or figma.once('stylechange') instead.`,
-            offReplacement: `The 'documentchange' event is deprecated. Please use the 'nodechange' event on any PageNode, or the 'stylechange' event on the figma object.`,
+            advice: `When using the dynamic-page manifest field, remember to call figma.loadAllPagesAsync() before using DocumentNode.{{method}}(). loadAllPagesAsync() only needs to be called once.`,
         },
         schema: [],
-        type: 'problem',
+        type: 'suggestion',
     },
     defaultOptions: [],
     create(context) {
@@ -49,14 +47,7 @@ exports.dynamicPageBanDocumentchangeEvent = (0, util_1.createPluginRule)({
                 if (!(0, util_1.matchAncestorTypes)(context, callee.object, ['PluginAPI'])) {
                     return;
                 }
-                let messageId = 'onReplacement';
-                if (calleeProp.name === 'once') {
-                    messageId = 'onceReplacement';
-                }
-                else if (calleeProp.name === 'off') {
-                    messageId = 'offReplacement';
-                }
-                context.report({ node, messageId });
+                context.report({ node, messageId: 'advice' });
             },
         };
     },

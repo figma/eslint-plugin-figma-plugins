@@ -1,6 +1,6 @@
-# Ban `documentchange` event (`@figma/figma-plugins/dynamic-page-ban-documentchange-event`)
+# Advice on using the `documentchange` event (`@figma/figma-plugins/dynamic-page-documentchange-event-advice`)
 
-💼 This rule is enabled in the ⚡ `dynamic-page` config.
+⚠️ This rule _warns_ in the ⚡ `dynamic-page` config.
 
 <!-- end auto-generated rule header -->
 

@@ -1,6 +1,6 @@
 # Ban synchronous property getters that are not compatible with `dynamic-page` (`@figma/figma-plugins/dynamic-page-ban-sync-prop-setters`)
 
-💼 This rule is enabled in the ⚡ `dynamic-page` config.
+💼 This rule is enabled in the following configs: ⚡ `dynamic-page`, 💥 `dynamic-page-problems-only`.
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 

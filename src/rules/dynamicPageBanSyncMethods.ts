@@ -13,16 +13,6 @@ interface DynamicPageBannedSyncMethod {
 
 const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
   {
-    method: 'getNodeById',
-    replacement: 'getNodeByIdAsync',
-    receiverTypes: ['PluginAPI'],
-  },
-  {
-    method: 'getStyleById',
-    replacement: 'getStyleByIdAsync',
-    receiverTypes: ['PluginAPI'],
-  },
-  {
     method: 'getFileThumbnailNode',
     replacement: 'getFileThumbnailNodeAsync',
     receiverTypes: ['PluginAPI'],
@@ -48,16 +38,6 @@ const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
     receiverTypes: ['PluginAPI'],
   },
   {
-    method: 'getVariableById',
-    replacement: 'getVariableByIdAsync',
-    receiverTypes: ['VariablesAPI'],
-  },
-  {
-    method: 'getVariableCollectionById',
-    replacement: 'getVariableCollectionByIdAsync',
-    receiverTypes: ['VariablesAPI'],
-  },
-  {
     method: 'getLocalVariableCollections',
     replacement: 'getLocalVariableCollectionsAsync',
     receiverTypes: ['VariablesAPI'],
@@ -68,13 +48,33 @@ const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
     receiverTypes: ['VariablesAPI'],
   },
   {
-    method: 'setRangeTextStyle',
-    replacement: 'setRangeTextStyleIdAsync',
-    receiverTypes: ['NonResizableTextMixin'],
+    method: 'getNodeById',
+    replacement: 'getNodeByIdAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getStyleById',
+    replacement: 'getStyleByIdAsync',
+    receiverTypes: ['PluginAPI'],
+  },
+  {
+    method: 'getVariableById',
+    replacement: 'getVariableByIdAsync',
+    receiverTypes: ['VariablesAPI'],
+  },
+  {
+    method: 'getVariableCollectionById',
+    replacement: 'getVariableCollectionByIdAsync',
+    receiverTypes: ['VariablesAPI'],
   },
   {
     method: 'setRangeFillStyle',
     replacement: 'setRangeFillStyleIdAsync',
+    receiverTypes: ['NonResizableTextMixin'],
+  },
+  {
+    method: 'setRangeTextStyle',
+    replacement: 'setRangeTextStyleIdAsync',
     receiverTypes: ['NonResizableTextMixin'],
   },
 ]
