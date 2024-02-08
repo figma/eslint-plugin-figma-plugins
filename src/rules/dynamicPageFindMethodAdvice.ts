@@ -5,7 +5,7 @@ import { createPluginRule, matchAncestorTypes } from '../util'
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-const findMethods = ['findAll', 'findAllWithCriteria', 'findChild', 'findChildren', 'findOne']
+const findMethods = ['findAll', 'findAllWithCriteria', 'findOne']
 
 export const dynamicPageFindMethodAdvice = createPluginRule({
   name: 'dynamic-page-find-method-advice',

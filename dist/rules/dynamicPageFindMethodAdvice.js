@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.dynamicPageFindMethodAdvice = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
-const findMethods = ['findAll', 'findAllWithCriteria', 'findChild', 'findChildren', 'findOne'];
+const findMethods = ['findAll', 'findAllWithCriteria', 'findOne'];
 exports.dynamicPageFindMethodAdvice = (0, util_1.createPluginRule)({
     name: 'dynamic-page-find-method-advice',
     meta: {
