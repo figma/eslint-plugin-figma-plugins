@@ -1,6 +1,6 @@
 # Ban `async` style-assignment methods from the `dynamic-page` beta (`@figma/figma-plugins/dynamic-page-ban-style-setters-temp`)
 
-💼 This rule is enabled in the following configs: ⚡ `dynamic-page`, 💥 `dynamic-page-problems-only`.
+💼 This rule is enabled in the following configs: 👍 `recommended`, 🔦 `recommended-problems-only`.
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 

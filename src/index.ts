@@ -42,14 +42,14 @@ export const rules: unknown = {
 }
 
 export const configs: unknown = {
-  'dynamic-page': {
+  recommended: {
     plugins: ['@figma/figma-plugins'],
     rules: {
       ...rulesetWithSeverity('error', dynamicPageErrs),
       ...rulesetWithSeverity('warn', dynamicePageAdvice),
     },
   },
-  'dynamic-page-problems-only': {
+  'recommended-problems-only': {
     plugins: ['@figma/figma-plugins'],
     rules: {
       ...rulesetWithSeverity('error', dynamicPageErrs),

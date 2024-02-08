@@ -1,6 +1,6 @@
 # Require functions that contain `await` to be `async` (`@figma/figma-plugins/await-requires-async`)
 
-💼 This rule is enabled in the following configs: ⚡ `dynamic-page`, 💥 `dynamic-page-problems-only`.
+💼 This rule is enabled in the following configs: 👍 `recommended`, 🔦 `recommended-problems-only`.
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 

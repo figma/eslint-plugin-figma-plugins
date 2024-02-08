@@ -1,6 +1,6 @@
 # Advice on using the `documentchange` event (`@figma/figma-plugins/dynamic-page-documentchange-event-advice`)
 
-⚠️ This rule _warns_ in the ⚡ `dynamic-page` config.
+⚠️ This rule _warns_ in the 👍 `recommended` config.
 
 <!-- end auto-generated rule header -->
 
