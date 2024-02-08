@@ -33,11 +33,11 @@ const dynamicePageAdvice = {
 // declaration file.
 exports.rules = Object.assign(Object.assign({}, dynamicPageErrs), dynamicePageAdvice);
 exports.configs = {
-    'dynamic-page': {
+    recommended: {
         plugins: ['@figma/figma-plugins'],
         rules: Object.assign(Object.assign({}, rulesetWithSeverity('error', dynamicPageErrs)), rulesetWithSeverity('warn', dynamicePageAdvice)),
     },
-    'dynamic-page-problems-only': {
+    'recommended-problems-only': {
         plugins: ['@figma/figma-plugins'],
         rules: Object.assign({}, rulesetWithSeverity('error', dynamicPageErrs)),
     },
