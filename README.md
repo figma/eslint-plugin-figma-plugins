@@ -27,8 +27,7 @@ If you haven't already, install ESLint. We recommend installing it alongside typ
 Update your ESLint config's `extends` array to include the `plugin:@figma/figma-plugins/recommended` ruleset. We also recommend the following rulesets:
 
 - `eslint:recommended`,
-- `plugin:@typescript-eslint/recommended-type-checked`
-- `plugin:@typescript-eslint/stylistic-type-checked`
+- `plugin:@typescript-eslint/recommended`
 
 To work with TypeScript code, ESLint also requires the following parser settings:
 
@@ -50,8 +49,7 @@ Here's a full example of `.eslintrc.js`:
 module.exports = {
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended-type-checked',
-    'plugin:@typescript-eslint/stylistic-type-checked',
+    'plugin:@typescript-eslint/recommended',
     'plugin:@figma/figma-plugins/recommended',
   ],
   parser: '@typescript-eslint/parser',
