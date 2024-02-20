@@ -5,13 +5,13 @@ import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } fr
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-interface DynamicPageBannedSyncPropGetter {
+interface DeprecatedSyncPropGetter {
   property: string
   replacement: string
   receiverTypes: string[]
 }
 
-const dynamicPageBannedSyncPropGetters: DynamicPageBannedSyncPropGetter[] = [
+const deprecatedSyncPropGetters: DeprecatedSyncPropGetter[] = [
   {
     property: 'instances',
     replacement: 'getInstancesAsync',
@@ -29,16 +29,16 @@ const dynamicPageBannedSyncPropGetters: DynamicPageBannedSyncPropGetter[] = [
   },
 ]
 
-export const dynamicPageBanSyncPropGetters = createPluginRule({
-  name: 'dynamic-page-ban-sync-prop-getters',
+export const banDeprecatedSyncPropGetters = createPluginRule({
+  name: 'ban-deprecated-sync-prop-getters',
   meta: {
     docs: {
-      description: 'Ban synchronous property getters that are not compatible with `dynamic-page`',
+      description: 'Ban use of deprecated synchronous property getters',
     },
     fixable: 'code',
     messages: {
       useReplacement:
-        '{{receiverType}}.{{property}} is not compatible with the dynamic-page manifest option. Please use {{replacement}} instead.',
+        'Reading from {{receiverType}}.{{property}} is deprecated. Please use {{replacement}} instead.',
     },
     schema: [],
     type: 'problem',
@@ -52,7 +52,7 @@ export const dynamicPageBanSyncPropGetters = createPluginRule({
           return
         }
 
-        const deprecation = dynamicPageBannedSyncPropGetters.find((g) => g.property === prop.name)
+        const deprecation = deprecatedSyncPropGetters.find((g) => g.property === prop.name)
         if (!deprecation) {
           return
         }

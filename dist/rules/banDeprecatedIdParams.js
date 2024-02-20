@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dynamicPageBanIdParams = void 0;
+exports.banDeprecatedIdParams = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
-const dynamicPageBannedIdParams = [
+const deprecatedIdParams = [
     {
         receiverType: 'VariablesAPI',
         method: 'createVariable',
@@ -33,11 +33,11 @@ const dynamicPageBannedIdParams = [
         asyncObjectFetch: 'figma.variables.getVariableByIdAsync',
     },
 ];
-exports.dynamicPageBanIdParams = (0, util_1.createPluginRule)({
-    name: 'dynamic-page-ban-id-params',
+exports.banDeprecatedIdParams = (0, util_1.createPluginRule)({
+    name: 'ban-deprecated-id-params',
     meta: {
         docs: {
-            description: 'Ban string ID parameters that are not compatible with `dynamic-page`',
+            description: 'Ban use of deprecated string ID parameters',
         },
         fixable: 'code',
         messages: {
@@ -58,7 +58,7 @@ exports.dynamicPageBanIdParams = (0, util_1.createPluginRule)({
                 if (calleeProp.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
                 }
-                const deprecation = dynamicPageBannedIdParams.find((p) => p.method === calleeProp.name);
+                const deprecation = deprecatedIdParams.find((p) => p.method === calleeProp.name);
                 if (!deprecation) {
                     return;
                 }

@@ -5,7 +5,7 @@ import { createPluginRule, getTypeName, isStringNode, matchAncestorTypes } from 
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-interface DynamicPageBannedIdParam {
+interface DeprectedIdParam {
   receiverType: string
   method: string
   paramIndex: number
@@ -13,7 +13,7 @@ interface DynamicPageBannedIdParam {
   asyncObjectFetch: string
 }
 
-const dynamicPageBannedIdParams: DynamicPageBannedIdParam[] = [
+const deprecatedIdParams: DeprectedIdParam[] = [
   {
     receiverType: 'VariablesAPI',
     method: 'createVariable',
@@ -44,11 +44,11 @@ const dynamicPageBannedIdParams: DynamicPageBannedIdParam[] = [
   },
 ]
 
-export const dynamicPageBanIdParams = createPluginRule({
-  name: 'dynamic-page-ban-id-params',
+export const banDeprecatedIdParams = createPluginRule({
+  name: 'ban-deprecated-id-params',
   meta: {
     docs: {
-      description: 'Ban string ID parameters that are not compatible with `dynamic-page`',
+      description: 'Ban use of deprecated string ID parameters',
     },
     fixable: 'code',
     messages: {
@@ -72,7 +72,7 @@ export const dynamicPageBanIdParams = createPluginRule({
           return
         }
 
-        const deprecation = dynamicPageBannedIdParams.find((p) => p.method === calleeProp.name)
+        const deprecation = deprecatedIdParams.find((p) => p.method === calleeProp.name)
         if (!deprecation) {
           return
         }
