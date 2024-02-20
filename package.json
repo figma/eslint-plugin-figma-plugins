@@ -1,6 +1,6 @@
 {
   "name": "@figma/eslint-plugin-figma-plugins",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "typescript-eslint rules for Figma plugin development",
   "main": "dist/index.js",
   "scripts": {
