@@ -9,7 +9,7 @@ interface PluginAPI {
 }
 `
 
-ruleTester().run('dynamic-page-ban-documentchange-event', dynamicPageDocumentchangeEventAdvice, {
+ruleTester().run('ban-deprecated-documentchange-event', dynamicPageDocumentchangeEventAdvice, {
   valid: [
     {
       code: `

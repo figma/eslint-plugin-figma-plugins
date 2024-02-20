@@ -5,13 +5,13 @@ import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } fr
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-interface DynamicPageBannedSyncPropSetter {
+interface DeprecatedSyncPropSetter {
   property: string
   replacement: string
   receiverTypes: string[]
 }
 
-const dynamicPageBannedSyncPropSetters: DynamicPageBannedSyncPropSetter[] = [
+const DeprecatedSyncPropSetters: DeprecatedSyncPropSetter[] = [
   {
     property: 'currentPage',
     replacement: 'setCurrentPageAsync',
@@ -54,11 +54,11 @@ const dynamicPageBannedSyncPropSetters: DynamicPageBannedSyncPropSetter[] = [
   },
 ]
 
-export const dynamicPageBanSyncPropSetters = createPluginRule({
-  name: 'dynamic-page-ban-sync-prop-setters',
+export const banDeprecatedSyncPropSetters = createPluginRule({
+  name: 'ban-deprecated-sync-prop-setters',
   meta: {
     docs: {
-      description: 'Ban synchronous property getters that are not compatible with `dynamic-page`',
+      description: 'Ban use of deprecated synchronous property getters',
     },
     fixable: 'code',
     messages: {
@@ -81,7 +81,7 @@ export const dynamicPageBanSyncPropSetters = createPluginRule({
           return
         }
 
-        const deprecation = dynamicPageBannedSyncPropSetters.find((s) => s.property === prop.name)
+        const deprecation = DeprecatedSyncPropSetters.find((s) => s.property === prop.name)
         if (!deprecation) {
           return
         }

@@ -1,4 +1,4 @@
-import { dynamicPageBanIdParams } from '../src/rules/dynamicPageBanIdParams'
+import { banDeprecatedIdParams } from '../src/rules/banDeprecatedIdParams'
 import { ruleTester } from './testUtil'
 
 const types = `
@@ -9,7 +9,7 @@ interface VariablesAPI {
 }
 `
 
-ruleTester().run('dynamicPageBanIdParams', dynamicPageBanIdParams, {
+ruleTester().run('banDeprecatedIdParams', banDeprecatedIdParams, {
   valid: [
     {
       code: `

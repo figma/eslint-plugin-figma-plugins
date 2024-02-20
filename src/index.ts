@@ -1,10 +1,9 @@
 import { awaitRequiresAsync } from './rules/awaitRequiresAsync'
 import { dynamicPageDocumentchangeEventAdvice } from './rules/dynamicPageDocumentchangeEventAdvice'
-import { dynamicPageBanIdParams } from './rules/dynamicPageBanIdParams'
-import { dynamicPageBanStyleSettersTemp } from './rules/dynamicPageBanStyleSettersTemp'
-import { dynamicPageBanSyncMethods } from './rules/dynamicPageBanSyncMethods'
-import { dynamicPageBanSyncPropGetters } from './rules/dynamicPageBanSyncPropGetters'
-import { dynamicPageBanSyncPropSetters } from './rules/dynamicPageBanSyncPropSetters'
+import { banDeprecatedIdParams } from './rules/banDeprecatedIdParams'
+import { banDeprecatedSyncMethods } from './rules/banDeprecatedSyncMethods'
+import { banDeprecatedSyncPropGetters } from './rules/banDeprecatedSyncPropGetters'
+import { banDeprecatedSyncPropSetters } from './rules/banDeprecatedSyncPropSetters'
 import { dynamicPageFindMethodAdvice } from './rules/dynamicPageFindMethodAdvice'
 
 function rulesetWithSeverity(
@@ -17,13 +16,12 @@ function rulesetWithSeverity(
   }, {} as Record<string, string>)
 }
 
-const dynamicPageErrs: Record<string, unknown> = {
+const errRules: Record<string, unknown> = {
   'await-requires-async': awaitRequiresAsync,
-  'dynamic-page-ban-id-params': dynamicPageBanIdParams,
-  'dynamic-page-ban-style-setters-temp': dynamicPageBanStyleSettersTemp,
-  'dynamic-page-ban-sync-methods': dynamicPageBanSyncMethods,
-  'dynamic-page-ban-sync-prop-getters': dynamicPageBanSyncPropGetters,
-  'dynamic-page-ban-sync-prop-setters': dynamicPageBanSyncPropSetters,
+  'ban-deprecated-id-params': banDeprecatedIdParams,
+  'ban-deprecated-sync-methods': banDeprecatedSyncMethods,
+  'ban-deprecated-sync-prop-getters': banDeprecatedSyncPropGetters,
+  'ban-deprecated-sync-prop-setters': banDeprecatedSyncPropSetters,
 }
 
 const dynamicePageAdvice: Record<string, unknown> = {
@@ -37,7 +35,7 @@ const dynamicePageAdvice: Record<string, unknown> = {
 // declaration file.
 
 export const rules: unknown = {
-  ...dynamicPageErrs,
+  ...errRules,
   ...dynamicePageAdvice,
 }
 
@@ -45,14 +43,14 @@ export const configs: unknown = {
   recommended: {
     plugins: ['@figma/figma-plugins'],
     rules: {
-      ...rulesetWithSeverity('error', dynamicPageErrs),
+      ...rulesetWithSeverity('error', errRules),
       ...rulesetWithSeverity('warn', dynamicePageAdvice),
     },
   },
   'recommended-problems-only': {
     plugins: ['@figma/figma-plugins'],
     rules: {
-      ...rulesetWithSeverity('error', dynamicPageErrs),
+      ...rulesetWithSeverity('error', errRules),
     },
   },
 }

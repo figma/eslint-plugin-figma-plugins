@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dynamicPageBanSyncPropGetters = void 0;
+exports.banDeprecatedSyncPropGetters = void 0;
 const typescript_estree_1 = require("@typescript-eslint/typescript-estree");
 const util_1 = require("../util");
-const dynamicPageBannedSyncPropGetters = [
+const deprecatedSyncPropGetters = [
     {
         property: 'instances',
         replacement: 'getInstancesAsync',
@@ -20,15 +20,15 @@ const dynamicPageBannedSyncPropGetters = [
         receiverTypes: ['InstanceNode'],
     },
 ];
-exports.dynamicPageBanSyncPropGetters = (0, util_1.createPluginRule)({
-    name: 'dynamic-page-ban-sync-prop-getters',
+exports.banDeprecatedSyncPropGetters = (0, util_1.createPluginRule)({
+    name: 'ban-deprecated-sync-prop-getters',
     meta: {
         docs: {
-            description: 'Ban synchronous property getters that are not compatible with `dynamic-page`',
+            description: 'Ban use of deprecated synchronous property getters',
         },
         fixable: 'code',
         messages: {
-            useReplacement: '{{receiverType}}.{{property}} is not compatible with the dynamic-page manifest option. Please use {{replacement}} instead.',
+            useReplacement: 'Reading from {{receiverType}}.{{property}} is deprecated. Please use {{replacement}} instead.',
         },
         schema: [],
         type: 'problem',
@@ -41,7 +41,7 @@ exports.dynamicPageBanSyncPropGetters = (0, util_1.createPluginRule)({
                 if (prop.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
                 }
-                const deprecation = dynamicPageBannedSyncPropGetters.find((g) => g.property === prop.name);
+                const deprecation = deprecatedSyncPropGetters.find((g) => g.property === prop.name);
                 if (!deprecation) {
                     return;
                 }

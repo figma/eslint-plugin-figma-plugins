@@ -5,13 +5,13 @@ import { addAsyncCallFix, createPluginRule, getTypeName, matchAncestorTypes } fr
 // This is a TypeScript bug; cf https://github.com/microsoft/TypeScript/issues/47663
 import type { TSESLint as _ } from '@typescript-eslint/utils'
 
-interface DynamicPageBannedSyncMethod {
+interface DeprecatedSyncMethod {
   method: string
   replacement: string
   receiverTypes: string[]
 }
 
-const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
+const deprecatedSyncMethods: DeprecatedSyncMethod[] = [
   {
     method: 'getFileThumbnailNode',
     replacement: 'getFileThumbnailNodeAsync',
@@ -79,16 +79,16 @@ const dynamicPageBannedSyncMethods: DynamicPageBannedSyncMethod[] = [
   },
 ]
 
-export const dynamicPageBanSyncMethods = createPluginRule({
-  name: 'dynamic-page-ban-sync-methods',
+export const banDeprecatedSyncMethods = createPluginRule({
+  name: 'ban-deprecated-sync-methods',
   meta: {
     docs: {
-      description: 'Ban synchronous methods that are not compatible with `dynamic-page`',
+      description: 'Ban use of deprecated synchronous methods',
     },
     fixable: 'code',
     messages: {
       useReplacement:
-        '{{receiverType}}.{{method}} is not compatible with the dynamic-page manifest option. Please use {{replacement}} instead.',
+        '{{receiverType}}.{{method}} is deprecated. Please use {{replacement}} instead.',
     },
     schema: [],
     type: 'problem',
@@ -107,7 +107,7 @@ export const dynamicPageBanSyncMethods = createPluginRule({
           return
         }
 
-        const deprecation = dynamicPageBannedSyncMethods.find((m) => m.method === calleeProp.name)
+        const deprecation = deprecatedSyncMethods.find((m) => m.method === calleeProp.name)
         if (!deprecation) {
           return
         }

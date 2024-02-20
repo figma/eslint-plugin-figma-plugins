@@ -13,7 +13,7 @@ interface DocumentNode {
 }
 `
 
-ruleTester().run('dynamic-page-ban-sync-methods', dynamicPageFindMethodAdvice, {
+ruleTester().run('ban-deprecated-sync-methods', dynamicPageFindMethodAdvice, {
   valid: [
     {
       code: `
