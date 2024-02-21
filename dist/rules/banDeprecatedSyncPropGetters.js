@@ -37,6 +37,11 @@ exports.banDeprecatedSyncPropGetters = (0, util_1.createPluginRule)({
     create(context) {
         return {
             MemberExpression(node) {
+                // allow the expression to be used in an assignment
+                const parent = node.parent;
+                if (parent && parent.type === typescript_estree_1.AST_NODE_TYPES.AssignmentExpression && parent.left === node) {
+                    return;
+                }
                 const prop = node.property;
                 if (prop.type !== typescript_estree_1.AST_NODE_TYPES.Identifier) {
                     return;
