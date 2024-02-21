@@ -2,8 +2,6 @@
 
 This repository defines [typescript-eslint](https://typescript-eslint.io/) rules for [Figma plugin development](https://www.figma.com/plugin-docs/).
 
-This linter is still in beta, and may include lint warnings about features that aren't generally available. Please avoid using it unless you've been advised to do so. We appreciate your patience!
-
 ## Installation
 
 ### Dependencies
