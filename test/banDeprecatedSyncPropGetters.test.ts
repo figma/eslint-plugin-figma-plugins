@@ -27,6 +27,15 @@ function func(componentNode: ComponentNode) {
 }
 `,
     },
+    {
+      // assignment expressions should be safe
+      code: `
+${types}
+function func(node: InstanceNode, comp: ComponentNode) {
+  node.mainComponent = comp
+}
+`,
+    },
   ],
   invalid: [
     {
