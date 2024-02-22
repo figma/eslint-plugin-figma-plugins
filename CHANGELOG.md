@@ -4,6 +4,8 @@
 
 Any changes that haven't been included in a published version will be listed here.
 
+## 0.14.0
+
 - Added `node.reactions = ...` to the list of banned property setters under `ban-deprecated-sync-prop-setters`. Use `node.setReactionsAsync` instead.
 
 ## 0.13.0
