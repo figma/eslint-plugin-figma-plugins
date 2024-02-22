@@ -2,6 +2,12 @@
 
 This repository defines [typescript-eslint](https://typescript-eslint.io/) rules for [Figma plugin development](https://www.figma.com/plugin-docs/).
 
+This tool helps you stay up to date with best practices and deprecations in the Figma Plugin API. You can use it to help identify, and in many cases automatically fix, issues in your plugin code. Like any ESLint plugin, it integrates with IDEs like VSCode to provide inline warnings and quick-fix functionality.
+
+### A quick look
+
+![An animation of VSCode quick fixes enabled by this plugin](./vscode-quickfix.gif)
+
 ## Installation
 
 ### Dependencies
@@ -20,9 +26,9 @@ npm install -D @figma/eslint-plugin-figma-plugins
 
 ### Configure eslint
 
-If you haven't already, install ESLint. We recommend installing it alongside typescript-eslint using [these instructions](https://typescript-eslint.io/getting-started#step-1-installation).
+Configure typescript-eslint as normal using [these instructions](https://typescript-eslint.io/getting-started#step-1-installation).
 
-Update your ESLint config's `extends` array to include the `plugin:@figma/figma-plugins/recommended` ruleset. We also recommend the following rulesets:
+Next, update your ESLint config's `extends` array to include the `plugin:@figma/figma-plugins/recommended` ruleset. We also recommend the following rulesets:
 
 - `eslint:recommended`,
 - `plugin:@typescript-eslint/recommended`
