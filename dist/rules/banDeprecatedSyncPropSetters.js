@@ -44,6 +44,11 @@ const DeprecatedSyncPropSetters = [
         replacement: 'setVectorNetworkAsync',
         receiverTypes: ['VectorLikeMixin'],
     },
+    {
+        property: 'reactions',
+        replacement: 'setReactionsAsync',
+        receiverTypes: ['ReactionMixin'],
+    },
 ];
 exports.banDeprecatedSyncPropSetters = (0, util_1.createPluginRule)({
     name: 'ban-deprecated-sync-prop-setters',
