@@ -5,6 +5,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
   ],
+  ignorePatterns: ['dist/', 'node_modules/', 'test/fixture', '**/*.js'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
