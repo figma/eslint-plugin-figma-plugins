@@ -16,14 +16,10 @@ jobs:
           node-version: 18
           cache: 'npm'
       - run: npm ci
-      - name: Typecheck
-        run: npm run typecheck
-      - name: Lint code
-        run: npm run lint
-      - name: Lint docs
-        run: npm run lint:docs
-      - name: Tests
-        run: npm run test
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run lint:docs
+      - run: npm run test
       - name: Check that commit contains build artifacts
         run: |
           npm run build
