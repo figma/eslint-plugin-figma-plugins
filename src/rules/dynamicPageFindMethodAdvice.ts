@@ -11,7 +11,7 @@ export const dynamicPageFindMethodAdvice = createPluginRule({
   name: 'dynamic-page-find-method-advice',
   meta: {
     docs: {
-      description: 'Advice on using the find*() family of methods',
+      description: 'Advice on using the find*() family of methods xxx',
     },
     messages: {
       advice:
