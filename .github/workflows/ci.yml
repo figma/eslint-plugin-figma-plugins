@@ -1,0 +1,29 @@
+name: CI checks
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint code
+        run: npm run lint
+      - name: Lint docs
+        run: npm run lint:docs
+      - name: Tests
+        run: npm run test
+      - name: Check that commit contains build artifacts
+        run: |
+          npm run build
+          git diff --exit-code || (echo "Error: changes detected after build." && exit 1)

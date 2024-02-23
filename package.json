@@ -9,8 +9,9 @@
     "clean": "rm -rf dist",
     "test": "jest test/",
     "test-workaround": "jest --detect-open-handles test/",
-    "lint:eslint-docs": "npm run update:eslint-docs -- --check",
-    "lint:js": "eslint .",
+    "lint": "eslint .",
+    "lint:docs": "npm run update:eslint-docs -- --check",
+    "typecheck": "tsc --noEmit",
     "update:eslint-docs": "eslint-doc-generator"
   },
   "repository": {
