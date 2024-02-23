@@ -6,7 +6,7 @@ For bug reports and feature requests for Figma or the Figma Plugin API itself, p
 
 ## Local development
 
-## Building the package
+### Building the package
 
 To rebuild both the lint plugin and documentation:
 
