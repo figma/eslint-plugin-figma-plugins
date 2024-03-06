@@ -42,7 +42,7 @@ To run tests, run:
 npm run tests
 ```
 
-To run an invidual test, you can run Jest with the `-t` parameter, followed by the string handle for the test. The handle is declared in each test file. Example:
+To run an individual test, you can run Jest with the `-t` parameter, followed by the string handle for the test. The handle is declared in each test file. Example:
 
 ```
 npx jest -t 'await-requires-async'
