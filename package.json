@@ -24,6 +24,13 @@
     "url": "https://github.com/figma/eslint-plugin-figma-plugins/issues"
   },
   "homepage": "https://github.com/figma/eslint-plugin-figma-plugins#readme",
+  "files": [
+    "dist/",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "@typescript-eslint/typescript-estree": "^6.13.2",
     "@typescript-eslint/utils": "^6.12.0",
