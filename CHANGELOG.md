@@ -4,8 +4,10 @@
 
 Any changes that haven't been included in a published version will be listed here.
 
-- build: specify the package files
-- fix: explicitly specify the "types" field in package.json
+## 0.15.0
+
+- package.json: restrict package files ([@andrii-bodnar](https://github.com/andrii-bodnar))
+- package.json: explicitly specify the "types" field in package.json. This fixes incompatibilities with TypeScript 4 and/or Webpack. ([@andrii-bodnar](https://github.com/andrii-bodnar))
 
 ## 0.14.0
 
