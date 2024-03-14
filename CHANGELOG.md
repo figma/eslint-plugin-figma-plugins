@@ -5,6 +5,7 @@
 Any changes that haven't been included in a published version will be listed here.
 
 - build: specify the package files
+- fix: explicitly specify the "types" field in package.json
 
 ## 0.14.0
 
