@@ -4,6 +4,8 @@
 
 Any changes that haven't been included in a published version will be listed here.
 
+- package.json: ensure [@figma/plugin-typings](https://www.npmjs.com/package/@figma/plugin-typings) is listed as a peer dependency
+
 ## 0.15.0
 
 - package.json: restrict package files ([@andrii-bodnar](https://github.com/andrii-bodnar))
