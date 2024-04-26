@@ -15,12 +15,13 @@ This tool helps you stay up to date with best practices and deprecations in the 
 This linter requires TypeScript, ESLint, typescript-eslint, and the Figma Plugin API type definitions. To install all of these, run:
 
 ```
-npm install -D typescript eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin @figma/plugin-typings
+npm install -D typescript eslint@8 @typescript-eslint/parser@6 @typescript-eslint/eslint-plugin@6 @figma/plugin-typings
 ```
 
-#### ESLint v9
+#### Notes on peer dependency versions
 
-This plugin is not yet compatible with ESLint 9. Once [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has been [upgraded to support ESLint 9](https://github.com/typescript-eslint/typescript-eslint/pull/9002), we'll update this README with example configurations that use the new ESLint 9 flat configs.
+- This plugin is not yet compatible with ESLint 9. Once [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has been [upgraded to support ESLint 9](https://github.com/typescript-eslint/typescript-eslint/pull/9002), we'll update this README with example configurations that use the new ESLint 9 flat configs.
+- This plugin has only been tested with typescript-eslint version 6.
 
 ### Install the ESLint plugin package
 
