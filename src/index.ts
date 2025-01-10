@@ -5,6 +5,7 @@ import { banDeprecatedSyncMethods } from './rules/banDeprecatedSyncMethods'
 import { banDeprecatedSyncPropGetters } from './rules/banDeprecatedSyncPropGetters'
 import { banDeprecatedSyncPropSetters } from './rules/banDeprecatedSyncPropSetters'
 import { dynamicPageFindMethodAdvice } from './rules/dynamicPageFindMethodAdvice'
+import { constrainProportionsReplacedByTargetAspectRatioAdvice } from './rules/constrainProportionsReplacedByTargetAspectRatioAdvice'
 
 function rulesetWithSeverity(
   severity: 'error' | 'warn',
@@ -29,6 +30,11 @@ const dynamicePageAdvice: Record<string, unknown> = {
   'dynamic-page-find-method-advice': dynamicPageFindMethodAdvice,
 }
 
+const warnRules: Record<string, unknown> = {
+  ...dynamicePageAdvice,
+  'constrain-proportions-replaced-by-target-aspect-ratio-advice': constrainProportionsReplacedByTargetAspectRatioAdvice
+}
+
 // The exported type annotations in this file are somewhat arbitrary; we do NOT
 // expect anyone to actually consume these types. We include them because we use
 // @figma as a type root, and all packages under a type root must emit a type
@@ -36,7 +42,7 @@ const dynamicePageAdvice: Record<string, unknown> = {
 
 export const rules: unknown = {
   ...errRules,
-  ...dynamicePageAdvice,
+  ...warnRules
 }
 
 export const configs: unknown = {
@@ -44,7 +50,7 @@ export const configs: unknown = {
     plugins: ['@figma/figma-plugins'],
     rules: {
       ...rulesetWithSeverity('error', errRules),
-      ...rulesetWithSeverity('warn', dynamicePageAdvice),
+      ...rulesetWithSeverity('warn', warnRules),
     },
   },
   'recommended-problems-only': {
