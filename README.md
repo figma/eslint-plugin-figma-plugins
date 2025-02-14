@@ -105,15 +105,16 @@ To use ESLint with VSCode, see the [ESLint VSCode extension](https://marketplace
 🔦 Set in the `recommended-problems-only` configuration.\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).
 
-| Name                                                                                               | Description                                          | 💼    | ⚠️ | 🔧 |
-| :------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :---- | :- | :- |
-| [await-requires-async](docs/rules/await-requires-async.md)                                         | Require functions that contain `await` to be `async` | 👍 🔦 |    | 🔧 |
-| [ban-deprecated-id-params](docs/rules/ban-deprecated-id-params.md)                                 | Ban use of deprecated string ID parameters           | 👍 🔦 |    | 🔧 |
-| [ban-deprecated-sync-methods](docs/rules/ban-deprecated-sync-methods.md)                           | Ban use of deprecated synchronous methods            | 👍 🔦 |    | 🔧 |
-| [ban-deprecated-sync-prop-getters](docs/rules/ban-deprecated-sync-prop-getters.md)                 | Ban use of deprecated synchronous property getters   | 👍 🔦 |    | 🔧 |
-| [ban-deprecated-sync-prop-setters](docs/rules/ban-deprecated-sync-prop-setters.md)                 | Ban use of deprecated synchronous property getters   | 👍 🔦 |    | 🔧 |
-| [dynamic-page-documentchange-event-advice](docs/rules/dynamic-page-documentchange-event-advice.md) | Advice on using the `documentchange` event           |       | 👍 |    |
-| [dynamic-page-find-method-advice](docs/rules/dynamic-page-find-method-advice.md)                   | Advice on using the find*() family of methods        |       | 👍 |    |
+| Name                                                                                                                                       | Description                                                            | 💼    | ⚠️ | 🔧 |
+| :----------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :---- | :- | :- |
+| [await-requires-async](docs/rules/await-requires-async.md)                                                                                 | Require functions that contain `await` to be `async`                   | 👍 🔦 |    | 🔧 |
+| [ban-deprecated-id-params](docs/rules/ban-deprecated-id-params.md)                                                                         | Ban use of deprecated string ID parameters                             | 👍 🔦 |    | 🔧 |
+| [ban-deprecated-sync-methods](docs/rules/ban-deprecated-sync-methods.md)                                                                   | Ban use of deprecated synchronous methods                              | 👍 🔦 |    | 🔧 |
+| [ban-deprecated-sync-prop-getters](docs/rules/ban-deprecated-sync-prop-getters.md)                                                         | Ban use of deprecated synchronous property getters                     | 👍 🔦 |    | 🔧 |
+| [ban-deprecated-sync-prop-setters](docs/rules/ban-deprecated-sync-prop-setters.md)                                                         | Ban use of deprecated synchronous property getters                     | 👍 🔦 |    | 🔧 |
+| [constrain-proportions-replaced-by-target-aspect-ratio-advice](docs/rules/constrain-proportions-replaced-by-target-aspect-ratio-advice.md) | Warns against using constrainProportions in favor of targetAspectRatio |       | 👍 |    |
+| [dynamic-page-documentchange-event-advice](docs/rules/dynamic-page-documentchange-event-advice.md)                                         | Advice on using the `documentchange` event                             |       | 👍 |    |
+| [dynamic-page-find-method-advice](docs/rules/dynamic-page-find-method-advice.md)                                                           | Advice on using the find*() family of methods                          |       | 👍 |    |
 
 <!-- end auto-generated rules list -->
 
