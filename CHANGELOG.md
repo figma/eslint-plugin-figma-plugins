@@ -4,6 +4,14 @@
 
 Any changes that haven't been included in a published version will be listed here.
 
+## 0.16.1
+
+- Ships changelog updates that were missing in 0.16.1.
+
+## 0.16.0
+
+- Add the `constrain-proportions-replaced-by-target-aspect-ratio-advice` rule, which adds a warning that advises using `targetAspectRatio` in favor of `constrainProportions`.
+
 ## 0.15.0
 
 - package.json: restrict package files ([@andrii-bodnar](https://github.com/andrii-bodnar))
