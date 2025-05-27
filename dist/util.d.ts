@@ -1,6 +1,6 @@
 import { ESLintUtils, TSESLint, TSESTree } from '@typescript-eslint/utils';
 import ts from 'typescript';
-export declare const createPluginRule: <TOptions extends readonly unknown[], TMessageIds extends string>({ name, meta, ...rule }: Readonly<ESLintUtils.RuleWithMetaAndName<TOptions, TMessageIds>>) => ESLintUtils.RuleModule<TMessageIds, TOptions, ESLintUtils.RuleListener>;
+export declare const createPluginRule: <Options extends readonly unknown[], MessageIds extends string>({ meta, name, ...rule }: Readonly<ESLintUtils.RuleWithMetaAndName<Options, MessageIds, unknown>>) => ESLintUtils.RuleModule<MessageIds, Options, unknown, ESLintUtils.RuleListener>;
 export declare function addAsyncCallFix<TMessageIds extends string, TOptions extends readonly unknown[]>({ context, fixer, expression, receiver, asyncIdentifier, args, argsPostProcessor, }: {
     context: TSESLint.RuleContext<TMessageIds, TOptions>;
     fixer: TSESLint.RuleFixer;

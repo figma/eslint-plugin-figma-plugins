@@ -14,4 +14,4 @@ import type { TSESLint } from '@typescript-eslint/utils';
  * "overlapping" with the fix that adds `await`. eslint reports do not permit
  * overlapping fixes.
  */
-export declare const awaitRequiresAsync: TSESLint.RuleModule<"requiresAsync", never[], TSESLint.RuleListener>;
+export declare const awaitRequiresAsync: TSESLint.RuleModule<"requiresAsync", never[], unknown, TSESLint.RuleListener>;

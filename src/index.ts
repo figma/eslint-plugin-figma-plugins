@@ -45,6 +45,7 @@ export const rules: unknown = {
   ...warnRules
 }
 
+// Legacy config format (for backwards compatibility)
 export const configs: unknown = {
   recommended: {
     plugins: ['@figma/figma-plugins'],
@@ -60,3 +61,41 @@ export const configs: unknown = {
     },
   },
 }
+
+// Flat config format
+const plugin = {
+  meta: {
+    name: '@figma/eslint-plugin-figma-plugins',
+    version: '0.16.1',
+  },
+  rules: {
+    ...errRules,
+    ...warnRules,
+  },
+}
+
+// Flat config presets
+export const flatConfigs = {
+  recommended: {
+    name: '@figma/eslint-plugin-figma-plugins/recommended',
+    plugins: {
+      '@figma/figma-plugins': plugin,
+    },
+    rules: {
+      ...rulesetWithSeverity('error', errRules),
+      ...rulesetWithSeverity('warn', warnRules),
+    },
+  },
+  'recommended-problems-only': {
+    name: '@figma/eslint-plugin-figma-plugins/recommended-problems-only',
+    plugins: {
+      '@figma/figma-plugins': plugin,
+    },
+    rules: {
+      ...rulesetWithSeverity('error', errRules),
+    },
+  },
+}
+
+// Export the plugin object for direct use
+export default plugin
