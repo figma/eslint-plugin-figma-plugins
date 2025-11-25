@@ -88,10 +88,11 @@ function isValidNode(x) {
     return typeof x === 'object' && x != null && 'type' in x && typeof x.type === 'string';
 }
 function composedOfTypeWithName(t, typeName) {
-    if (t.symbol && t.symbol.name === typeName) {
+    var _a, _b;
+    if (((_a = t.symbol) === null || _a === void 0 ? void 0 : _a.name) === typeName) {
         return true;
     }
-    if (t.aliasSymbol && t.aliasSymbol.name === typeName) {
+    if (((_b = t.aliasSymbol) === null || _b === void 0 ? void 0 : _b.name) === typeName) {
         return true;
     }
     if (t.isUnion()) {

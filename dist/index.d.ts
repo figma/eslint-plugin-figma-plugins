@@ -1,14 +1,5 @@
 export declare const rules: unknown;
 export declare const configs: unknown;
-declare const plugin: {
-    meta: {
-        name: string;
-        version: string;
-    };
-    rules: {
-        [x: string]: unknown;
-    };
-};
 export declare const flatConfigs: {
     recommended: {
         name: string;
@@ -45,4 +36,3 @@ export declare const flatConfigs: {
         };
     };
 };
-export default plugin;

@@ -32,22 +32,24 @@ const warnRules = Object.assign(Object.assign({}, dynamicePageAdvice), { 'constr
 // @figma as a type root, and all packages under a type root must emit a type
 // declaration file.
 exports.rules = Object.assign(Object.assign({}, errRules), warnRules);
+const recommendedRules = Object.assign(Object.assign({}, rulesetWithSeverity('error', errRules)), rulesetWithSeverity('warn', warnRules));
+const recommendedProblemsOnlyRules = Object.assign({}, rulesetWithSeverity('error', errRules));
 // Legacy config format (for backwards compatibility)
 exports.configs = {
     recommended: {
         plugins: ['@figma/figma-plugins'],
-        rules: Object.assign(Object.assign({}, rulesetWithSeverity('error', errRules)), rulesetWithSeverity('warn', warnRules)),
+        rules: recommendedRules,
     },
     'recommended-problems-only': {
         plugins: ['@figma/figma-plugins'],
-        rules: Object.assign({}, rulesetWithSeverity('error', errRules)),
+        rules: recommendedProblemsOnlyRules,
     },
 };
 // Flat config format
 const plugin = {
     meta: {
         name: '@figma/eslint-plugin-figma-plugins',
-        version: '0.16.1',
+        version: '1.0.0',
     },
     rules: Object.assign(Object.assign({}, errRules), warnRules),
 };
@@ -58,15 +60,13 @@ exports.flatConfigs = {
         plugins: {
             '@figma/figma-plugins': plugin,
         },
-        rules: Object.assign(Object.assign({}, rulesetWithSeverity('error', errRules)), rulesetWithSeverity('warn', warnRules)),
+        rules: recommendedRules,
     },
     'recommended-problems-only': {
         name: '@figma/eslint-plugin-figma-plugins/recommended-problems-only',
         plugins: {
             '@figma/figma-plugins': plugin,
         },
-        rules: Object.assign({}, rulesetWithSeverity('error', errRules)),
+        rules: recommendedProblemsOnlyRules,
     },
 };
-// Export the plugin object for direct use
-exports.default = plugin;

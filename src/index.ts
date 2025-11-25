@@ -45,20 +45,24 @@ export const rules: unknown = {
   ...warnRules
 }
 
+const recommendedRules = {
+  ...rulesetWithSeverity('error', errRules),
+  ...rulesetWithSeverity('warn', warnRules),
+}
+
+const recommendedProblemsOnlyRules = {
+  ...rulesetWithSeverity('error', errRules),
+}
+
 // Legacy config format (for backwards compatibility)
 export const configs: unknown = {
   recommended: {
     plugins: ['@figma/figma-plugins'],
-    rules: {
-      ...rulesetWithSeverity('error', errRules),
-      ...rulesetWithSeverity('warn', warnRules),
-    },
+    rules: recommendedRules,
   },
   'recommended-problems-only': {
     plugins: ['@figma/figma-plugins'],
-    rules: {
-      ...rulesetWithSeverity('error', errRules),
-    },
+    rules: recommendedProblemsOnlyRules,
   },
 }
 
@@ -66,7 +70,7 @@ export const configs: unknown = {
 const plugin = {
   meta: {
     name: '@figma/eslint-plugin-figma-plugins',
-    version: '0.16.1',
+    version: '1.0.0',
   },
   rules: {
     ...errRules,
@@ -81,21 +85,13 @@ export const flatConfigs = {
     plugins: {
       '@figma/figma-plugins': plugin,
     },
-    rules: {
-      ...rulesetWithSeverity('error', errRules),
-      ...rulesetWithSeverity('warn', warnRules),
-    },
+    rules: recommendedRules,
   },
   'recommended-problems-only': {
     name: '@figma/eslint-plugin-figma-plugins/recommended-problems-only',
     plugins: {
       '@figma/figma-plugins': plugin,
     },
-    rules: {
-      ...rulesetWithSeverity('error', errRules),
-    },
+    rules: recommendedProblemsOnlyRules,
   },
 }
-
-// Export the plugin object for direct use
-export default plugin
