@@ -24,9 +24,17 @@ npm install -D eslint@8 @typescript-eslint/parser@8 @typescript-eslint/eslint-pl
 ```
 
 For ESLint 9 with flat config:
-The default Figma plugin template uses older versions of these dependencies, so you may need to edit `package.json` manually to get more recent versions.
 ```
 npm install -D eslint@9 @typescript-eslint/parser@8 @typescript-eslint/eslint-plugin@8  typescript-eslint@8
+```
+
+The default Figma plugin template uses older versions of these dependencies, so you may need to edit `package.json` manually to get more recent versions.
+We have tested flat config specifically with the following peer dependencies:
+```
+- `@typescript-eslint/eslint-plugin`: `8.48.1`
+- `@typescript-eslint/parser`: `^8.48.1`
+- `eslint`: `^9.39.1`
+- `typescript-eslint`: `^8.48.1`
 ```
 
 ### Install the ESLint plugin package
@@ -40,38 +48,10 @@ npm install -D @figma/eslint-plugin-figma-plugins
 Choose the configuration method based on your ESLint version:
 
 #### ESLint 9+ (Flat Config)
-We have tested this specifically with the following peer dependencies:
-- `@typescript-eslint/eslint-plugin: "^8.48.1"`
-- `@typescript-eslint/parser: "^8.48.1"`
-- `eslint: "^9.39.1"`
-- `typescript-eslint: "^8.48.1"`
 
-Update your ESLint config to include the eslint-plugin-figma-plugins by adding the following to the `defineConfig()` function (documentation is here: https://typescript-eslint.io/getting-started/#details)
+Update your ESLint config to include the eslint-plugin-figma-plugins by creating an `eslint.config.mjs` file utilizing the new `defineConfig()` function (documentation is here: https://typescript-eslint.io/getting-started/#details)
 
-```
-{
-    files: ['**/*.ts'],
-    languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        project: './tsconfig.json',
-      },
-    },
-    plugins: {
-      '@figma/figma-plugins': figmaPlugin,
-    },
-    rules: {
-      ...figmaPlugin.configs.recommended.rules,
-    },
-  }
-```
-
-We also recommend the following rulesets:
-
-- `js.configs.recommended`: In the legacy config format, this is the same as `eslint:recommended` - (documentation)[https://eslint.org/docs/latest/use/configure/migration-guide]
-- `tseslint.configs.recommended`: In the legacy config format, this is the same as `plugin:@typescript-eslint/recommended` - (documentation)[https://typescript-eslint.io/getting-started/]
-
-Here's a full example of `eslint.config.mjs` file:
+Here's an example `eslint.config.mjs` that enables the `recommended` ruleset for this plugin, as well as the recommended rulesets from the `@eslint/js` and `typescript-eslint` packages:
 
 ```javascript
 import js from '@eslint/js';
@@ -94,7 +74,7 @@ export default defineConfig(
       '@figma/figma-plugins': figmaPlugin,
     },
     rules: {
-      ...figmaPlugin.configs.recommended.rules,
+      ...figmaPlugin.flatConfigs.recommended.rules,
     },
   }
 );
