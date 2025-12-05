@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.configs = exports.rules = void 0;
+exports.flatConfigs = exports.configs = exports.rules = void 0;
 const awaitRequiresAsync_1 = require("./rules/awaitRequiresAsync");
 const dynamicPageDocumentchangeEventAdvice_1 = require("./rules/dynamicPageDocumentchangeEventAdvice");
 const banDeprecatedIdParams_1 = require("./rules/banDeprecatedIdParams");
@@ -32,13 +32,41 @@ const warnRules = Object.assign(Object.assign({}, dynamicePageAdvice), { 'constr
 // @figma as a type root, and all packages under a type root must emit a type
 // declaration file.
 exports.rules = Object.assign(Object.assign({}, errRules), warnRules);
+const recommendedRules = Object.assign(Object.assign({}, rulesetWithSeverity('error', errRules)), rulesetWithSeverity('warn', warnRules));
+const recommendedProblemsOnlyRules = Object.assign({}, rulesetWithSeverity('error', errRules));
+// Legacy config format (for backwards compatibility)
 exports.configs = {
     recommended: {
         plugins: ['@figma/figma-plugins'],
-        rules: Object.assign(Object.assign({}, rulesetWithSeverity('error', errRules)), rulesetWithSeverity('warn', warnRules)),
+        rules: recommendedRules,
     },
     'recommended-problems-only': {
         plugins: ['@figma/figma-plugins'],
-        rules: Object.assign({}, rulesetWithSeverity('error', errRules)),
+        rules: recommendedProblemsOnlyRules,
+    },
+};
+// Flat config format
+const plugin = {
+    meta: {
+        name: '@figma/eslint-plugin-figma-plugins',
+        version: '1.0.0',
+    },
+    rules: Object.assign(Object.assign({}, errRules), warnRules),
+};
+// Flat config presets
+exports.flatConfigs = {
+    recommended: {
+        name: '@figma/eslint-plugin-figma-plugins/recommended',
+        plugins: {
+            '@figma/figma-plugins': plugin,
+        },
+        rules: recommendedRules,
+    },
+    'recommended-problems-only': {
+        name: '@figma/eslint-plugin-figma-plugins/recommended-problems-only',
+        plugins: {
+            '@figma/figma-plugins': plugin,
+        },
+        rules: recommendedProblemsOnlyRules,
     },
 };

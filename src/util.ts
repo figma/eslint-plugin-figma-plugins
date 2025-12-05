@@ -124,11 +124,11 @@ function isValidNode(x: unknown): x is TSESTree.Node {
 }
 
 function composedOfTypeWithName(t: ts.Type, typeName: string): boolean {
-  if (t.symbol && t.symbol.name === typeName) {
+  if (t.symbol?.name === typeName) {
     return true
   }
 
-  if (t.aliasSymbol && t.aliasSymbol.name === typeName) {
+  if (t.aliasSymbol?.name === typeName) {
     return true
   }
 

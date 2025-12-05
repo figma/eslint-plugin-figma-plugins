@@ -15,13 +15,27 @@ This tool helps you stay up to date with best practices and deprecations in the 
 This linter requires TypeScript, ESLint, typescript-eslint, and the Figma Plugin API type definitions. To install all of these, run:
 
 ```
-npm install -D typescript eslint@8 @typescript-eslint/parser@6 @typescript-eslint/eslint-plugin@6 @figma/plugin-typings
+npm install -D typescript eslint @figma/plugin-typings
 ```
 
-#### Notes on peer dependency versions
+For ESLint 8 with legacy config:
+```
+npm install -D eslint@8 @typescript-eslint/parser@8 @typescript-eslint/eslint-plugin@8
+```
 
-- This plugin is not yet compatible with ESLint 9. Once [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has been [upgraded to support ESLint 9](https://github.com/typescript-eslint/typescript-eslint/pull/9002), we'll update this README with example configurations that use the new ESLint 9 flat configs.
-- This plugin has only been tested with typescript-eslint version 6.
+For ESLint 9 with flat config:
+```
+npm install -D eslint@9 @typescript-eslint/parser@8 @typescript-eslint/eslint-plugin@8  typescript-eslint@8
+```
+
+The default Figma plugin template uses older versions of these dependencies, so you may need to edit `package.json` manually to get more recent versions.
+We have tested flat config specifically with the following peer dependencies:
+```
+- `@typescript-eslint/eslint-plugin`: `8.48.1`
+- `@typescript-eslint/parser`: `^8.48.1`
+- `eslint`: `^9.39.1`
+- `typescript-eslint`: `^8.48.1`
+```
 
 ### Install the ESLint plugin package
 
@@ -31,7 +45,44 @@ npm install -D @figma/eslint-plugin-figma-plugins
 
 ### Configure eslint
 
-Configure typescript-eslint as normal using [these instructions](https://typescript-eslint.io/getting-started#step-1-installation).
+Choose the configuration method based on your ESLint version:
+
+#### ESLint 9+ (Flat Config)
+
+Update your ESLint config to include the eslint-plugin-figma-plugins by creating an `eslint.config.mjs` file utilizing the new `defineConfig()` function (documentation is here: https://typescript-eslint.io/getting-started/#details)
+
+Here's an example `eslint.config.mjs` that enables the `recommended` ruleset for this plugin, as well as the recommended rulesets from the `@eslint/js` and `typescript-eslint` packages:
+
+```javascript
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import * as figmaPlugin from '@figma/eslint-plugin-figma-plugins';
+import { defineConfig } from 'eslint/config'
+
+export default defineConfig(
+  js.configs.recommended,
+  tseslint.configs.recommended,
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+    },
+    plugins: {
+      '@figma/figma-plugins': figmaPlugin,
+    },
+    rules: {
+      ...figmaPlugin.flatConfigs.recommended.rules,
+    },
+  }
+);
+```
+
+#### ESLint 8 (Legacy Config)
+
+Configure typescript-eslint as normal using [these instructions](https://typescript-eslint.io/getting-started/legacy-eslint-setup).
 
 Next, update your ESLint config's `extends` array to include the `plugin:@figma/figma-plugins/recommended` ruleset. We also recommend the following rulesets:
 
@@ -94,6 +145,21 @@ Autofixes are also available via some IDEs.
 ### VSCode
 
 To use ESLint with VSCode, see the [ESLint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). This extension will show rule violations inline, as well as provide opportunities to run autofixes directly in the IDE.
+
+## Available Configurations
+
+This plugin provides two configurations:
+
+- **`recommended`**: Includes all rules - errors for breaking changes and warnings for advisories
+- **`recommended-problems-only`**: Only includes error-level rules for breaking changes, omitting warnings
+
+For flat config, use:
+- `figmaPlugin.flatConfigs.recommended`
+- `figmaPlugin.flatConfigs['recommended-problems-only']`
+
+For legacy config, use:
+- `plugin:@figma/figma-plugins/recommended`
+- `plugin:@figma/figma-plugins/recommended-problems-only`
 
 ## Rules
 
